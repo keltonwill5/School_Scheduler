@@ -31,6 +31,11 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
+  <!-- Bootstrap stuff -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script src="plugins/LocationAPI/dist/locationpicker.jquery.min.js"></script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -202,16 +207,16 @@
           </li>
 
           <li>
-          <a href="pages/calendar.html">
-            <i class="fa fa-users"></i> <span>Users</span>
-            <span class="pull-right-container">
+            <a href="pages/calendar.html">
+              <i class="fa fa-users"></i> <span>Users</span>
+              <span class="pull-right-container">
               <small class="label pull-right bg-green">600</small>
             </span>
-            <ul class="treeview-menu">
-              <li class="active"><a href="user.html"><i class="fa fa-circle-o"></i> View</a></li>
-            </ul>
-          </a>
-        </li>
+              <ul class="treeview-menu">
+                <li class="active"><a href="user.html"><i class="fa fa-circle-o"></i> View</a></li>
+              </ul>
+            </a>
+          </li>
 
           <li>
             <a href="pages/calendar.html">
@@ -314,6 +319,59 @@
                     </div>
                   </div>
 
+                  <div class="form-horizontal" style="width: 550px">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Location:</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="us3-address" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">Radius:</label>
+
+                      <div class="col-sm-5">
+                        <input type="text" class="form-control" id="us3-radius" />
+                      </div>
+                    </div>
+                    <div id="us3" style="width: 550px; height: 400px;"></div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="m-t-small">
+                      <label class="p-r-small col-sm-1 control-label">Lat.:</label>
+
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control" style="width: 110px" id="us3-lat" />
+                      </div>
+                      <label class="p-r-small col-sm-2 control-label">Long.:</label>
+
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control" style="width: 110px" id="us3-lon" />
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <script>
+                      $('#us3').locationpicker({
+                        location: {
+                          latitude: 28.6024274,
+                          longitude: -81.20005989999999
+                        },
+                        radius: 300,
+                        inputBinding: {
+                          latitudeInput: $('#us3-lat'),
+                          longitudeInput: $('#us3-lon'),
+                          radiusInput: $('#us3-radius'),
+                          locationNameInput: $('#us3-address')
+                        },
+                        enableAutocomplete: true,
+                        onchanged: function (currentLocation, radius, isMarkerDropped) {
+                          // Uncomment line below to show alert on each Location Changed event
+                          //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+                        }
+                      });
+                    </script>
+                  </div>
+
+                  <br>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Contact Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
