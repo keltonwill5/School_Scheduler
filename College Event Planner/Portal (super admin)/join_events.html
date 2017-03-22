@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Users</title>
+  <title>AdminLTE 2 | Data Tables</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -168,8 +168,8 @@
           </a>
         </li>
 
-        <li>
-          <a href="pages/calendar.html">
+        <li class="active">
+          <a href="">
             <i class="fa fa-calendar"></i> <span>Events</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">10</small>
@@ -178,12 +178,12 @@
               <li><a href="view_events.html"><i class="fa fa-circle-o"></i> View</a></li>
               <li><a href="add_events.html"><i class="fa fa-circle-o"></i>Add</a></li>
               <li><a href="modify_events.html"><i class="fa fa-circle-o"></i> Modify</a></li>
-              <li><a href="join_events.html"><i class="fa fa-circle-o"></i> Join</a></li>
+              <li class="active"><a href="join_events.html"><i class="fa fa-circle-o"></i> Join</a></li>
             </ul>
           </a>
         </li>
 
-        <li class="active">
+        <li>
           <a href="pages/calendar.html">
             <i class="fa fa-users"></i> <span>Users</span>
             <span class="pull-right-container">
@@ -202,9 +202,11 @@
               <small class="label pull-right bg-green">20</small>
             </span>
             <ul class="treeview-menu">
-              <li><a href="view_rso.html"><i class="fa fa-circle-o"></i> View</a></li>
-              <li><a href="add_rso.html"><i class="fa fa-circle-o"></i>Add</a></li>
-             <ul>
+              <li><a href="index.html"><i class="fa fa-circle-o"></i> View</a></li>
+              <li><a href="index2.html"><i class="fa fa-circle-o"></i>Add</a></li>
+              <li><a href="index.html"><i class="fa fa-circle-o"></i> Modify</a></li>
+              <li><a href="index.html"><i class="fa fa-circle-o"></i> Join</a></li>
+            </ul>
           </a>
         </li>
 
@@ -218,11 +220,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Users List
+        Current Events
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Users</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Events</a></li>
+        <li><a href="#">Join</a></li>
       </ol>
     </section>
 
@@ -236,35 +238,36 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Event Name</th>
                   <th>School</th>
-                  <th>Username</th>
-                  <th>Registered Events</th>
-                  <th>Options</th>
+                  <th>Category</th>
+                  <th>Time</th>
+                  <th>Date</th>
+                  <th>Status</th>
                 </tr>
                 </thead>
 
                 <tbody>
 
                 <tr>
-                  <td>Aris Socorro</td>
+                  <td>Programming Team Contest</td>
                   <td>UCF</td>
-                  <td>asocorro</td>
-                  <td>5</td>
+                  <td>Academic</td>
+                  <td>12:00 P.M.</td>
+                  <td>04/02/17</td>
                   <td>
-                    <button type="danger" class="btn btn-danger">Delete</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Join Event</button>
                   </td>
                 </tr>
 
                 <tr>
-                  <td>Michael Vigil</td>
+                  <td>Football Game UCF vs. FIU</td>
                   <td>UCF</td>
-                  <td>mvigil</td>
-                  <td>3</td>
+                  <td>Sports</td>
+                  <td>TBA</td>
+                  <td>09/02/17</td>
                   <td>
-                    <button type="danger" class="btn btn-danger">Delete</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Join Event</button>
                   </td>
                 </tr>
 
