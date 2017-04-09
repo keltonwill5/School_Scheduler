@@ -1,0 +1,103 @@
+SUMMARY
+
+#(Assuming YYYYMMDDhhmmss for createDate)
+
+#(Modified events -> ? Add a binary 'modified' column to Events? Is this going to be based off last login? Events that have status 'Planned' and Modified=1?)
+
+#(Assume new = events that haven’t happened? Rather than new events since last login?)
+#(Not sure if function call/all this is right :D)
+CREATE PROCEDURE new_events
+As
+SELECT COUNT ((SELECT name FROM Events WHERE event_status(name) = 'Planned')) FROM Events
+
+CREATE PROCEDURE total_schools
+As
+SELECT COUNT (name) FROM School
+
+CREATE PROCEDURE total_members
+As
+SELECT COUNT (name) FROM Members
+
+CREATE PROCEDURE latest_members
+As
+SELECT name, picture,  createDate, userType FROM Members
+ORDER BY createDate DESC limit 8
+
+CREATE PROCEDURE latest_events
+As
+SELECT name, description, type, createDate FROM Events
+ORDER BY createDate DESC limit 4
+
+#(needs to convert the dates to char to concatenate. Assumes events last 2 hours)
+#(Dunno if I’m using returns right :D)
+CREATE PROCEDURE event_status (@nameVar Varchar(30))
+RETURNS status
+BEGIN
+DECLARE statusVar status
+SELECT name, date, time, 
+Case when date = NULL then ‘Cancelled’
+Case when ((CURDATE() + 0) + (CURTIME() + 0)) < (date + time) then ‘Planned’
+Case when ((CURDATE() + 0) + (CURTIME() + 0)) between (date + time) and (date + (time + 20000)) then ‘In Progress’
+Case when ((CURDATE() + 0) + (CURTIME() + 0)) > (date + (time + 20000)) then ‘Completed’
+End statusVar
+FROM Events WHERE name = nameVar
+Return statusVar
+END
+
+#(need picture col, or did we decide on now school pictures?)
+CREATE PROCEDURE latest_schools
+As
+SELECT name, address, picture FROM School
+ORDER BY createDate DESC limit 4
+
+
+SCHOOLS (View)
+
+CREATE PROCEDURE view_schools (@numEntries int, @page int)
+As
+SELECT name, address, phone, email
+FROM School
+LIMIT numEntries OFFSET ((page-1)*int)
+
+#(Update to be able to search for phone, email, address?)
+CREATE PROCEDURE search_schools (@searchTerm Varchar(30), @numEntries int, @page int)
+As
+SELECT name, address, phone, email 
+FROM School
+WHERE name LIKE %searchTerm%
+LIMIT numEntries OFFSET((page-1)*int)
+
+CREATE PROCEDURE delete_school (@nameVar Varchar(30))
+As
+DELETE FROM school
+WHERE name = nameVar
+
+CREATE PROCEDURE modify_school ()
+#(Make this an HTML page like Add School, except auto-fills text boxes and modifies rows instead of adding rows?)
+
+
+SCHOOLS (Add)
+
+#(Need to turn createDate values into char to concatenate)
+CREATE PROCEDURE add_school (@nameVar Varchar(30), @addressVar Varchar(30), @phoneVar Varchar(12), @emailVar Varchar(30))
+As
+INSERT INTO School (name, createDate, address, phone, email)
+VALUES
+(nameVar, ((CURDATE() + 0) + (CURTIME() + 0)), addressVar, phoneVar, emailVar)
+
+EVENTS (View)
+
+#(I assume returning all events and adjusting server side is better than dynamic calls based off current view?)
+CREATE PROCEDURE view_events
+As
+SELECT name, date FROM Events
+
+EVENTS (Add)
+
+#(Default for privacy? What are privacy options?)
+#(Concatenate curDate etc)
+CREATE PROCEDURE add_event (@nameVar Varchar(30), @categoryVar Varchar(30), @descriptionVar Varchar(30), @timeVar int, @dateVar int, @phoneVar Varchar(12), @locationVar Varchar(30), @emailVar Varchar(30), @userVar)
+As
+INSERT INTO Events (name, createDate, description, category, time, date, location, contactPhone, contactEmail, privacy, schoolName , rsoName)
+VALUES
+(nameVar, ((CURDATE() + 0) + (CURTIME() + 0)), descriptionVar, categoryVar, timeVar, dateVar, locationVar, phoneVar, emailVar, (???), (SELECT schoolName FROM RSO WHERE name = userVar), userVar)
