@@ -29,8 +29,8 @@ SELECT name, description, type, createDate FROM Events
 ORDER BY createDate DESC limit 4
 
 #(needs to convert the dates to char to concatenate. Assumes events last 2 hours)
-#(Dunno if I’m using returns right :D)
-CREATE PROCEDURE event_status (@nameVar Varchar(30))
+#(Dunno if I'm doing functions right :D)
+CREATE FUNCTION event_status (@nameVar Varchar(30))
 RETURNS status
 BEGIN
 DECLARE statusVar status
