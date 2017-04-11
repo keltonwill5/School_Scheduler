@@ -1,0 +1,4 @@
+SELECT DISTINCT a.product_name
+FROM `ps_order_detail` a 
+JOIN ps_product_lang b 
+    ON a.product_id=b.id_product
