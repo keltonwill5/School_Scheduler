@@ -11,10 +11,7 @@ namespace COP_4710_College_App.Controllers
         // GET: Home
         public ActionResult LoginPage()
         {
-           Models.callData dataPull = new Models.callData();
-            
-            IEnumerable<Models.TestModel> tests = dataPull.DataPull();
-            ViewBag.MyTests = tests;
+           
             return View();
         }
 
