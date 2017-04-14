@@ -20,6 +20,9 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="~/dist/css/skins/_all-skins.min.css">
 
+    <!-- Modal CSS-->
+    <link rel="stylesheet" href="~/dist/css/modal.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -40,7 +43,7 @@
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
-            <div class="navbar navbar-static-top">
+            <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
@@ -116,8 +119,7 @@
                         </li>
                     </ul>
                 </div>
-
-                </nav>
+            </nav>
         </header>
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
@@ -212,6 +214,103 @@
             <!-- /.sidebar -->
         </aside>
 
+        <!-- Modal Items-->
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span> Update RSO</h4>
+                            </div>
+
+                            <form action="#" method="post" accept-charset="utf-8">
+                                <div class="modal-body" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                            <input class="form-control" name="firstname" placeholder="Name" type="text" required autofocus />
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                            <input class="form-control" name="lastname" placeholder="Contact Person" type="text" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                            <input class="form-control" name="email" placeholder="Contact E-mail" type="text" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                            <input type="text" placeholder="Contact Phone" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                            <select class="form-control">
+                                                <option>School</option>
+                                                <option>UCF</option>
+                                                <option>FSU</option>
+                                                <option>UM</option>
+                                                <option>FIU</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                            <select class="form-control">
+                                                <option>Type</option>
+                                                <option>Fraternity</option>
+                                                <option>Religious</option>
+                                                <option>Political</option>
+                                                <option>Academic</option>
+                                                <option>Recreational</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <textarea style="resize:vertical;" class="form-control" placeholder="Description" rows="6" name="comment" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <input type="text" class="form-control" placeholder="Member 1">
+                                            <input type="text" class="form-control" placeholder="Member 2">
+                                            <input type="text" class="form-control" placeholder="Member 3">
+                                            <input type="text" class="form-control" placeholder="Member 4">
+                                            <input type="text" class="form-control" placeholder="Member 5"> 
+                                            <input type="text" class="form-control" placeholder="Member 6">
+                                            <input type="text" class="form-control" placeholder="Member 7">
+                                            <input type="text" class="form-control" placeholder="Member 8">
+                                            <input type="text" class="form-control" placeholder="Member 9">
+                                            <input type="text" class="form-control" placeholder="Member 10"> 
+                                        </div>
+                                    </div>
+
+                                </div>
+                              </form>
+
+                                <div class="panel-footer" style="margin-bottom:-14px;">
+                                    <input type="submit" class="btn btn-success" value="Update" />
+                                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                                    <input type="reset" class="btn btn-danger" value="Clear" />
+                                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                    <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+     
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -240,6 +339,7 @@
                                             <th>Type</th>
                                             <th>Point of Contact</th>
                                             <th>Contact Number</th>
+                                            <th>Total Members</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -252,9 +352,10 @@
                                             <td>Fraternity</td>
                                             <td>Aris Socorro</td>
                                             <td>(786) 580-7465</td>
+                                            <td>10</td>
                                             <td>
                                                 <button type="danger" class="btn btn-danger">Delete</button>
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
                                                 <button type="button" class="btn btn-success">Join</button>
                                             </td>
                                         </tr>
@@ -265,14 +366,13 @@
                                             <td>Religious</td>
                                             <td>Michael Vigil</td>
                                             <td>(407) 222-2222</td>
+                                            <td>15</td>
                                             <td>
                                                 <button type="danger" class="btn btn-danger">Delete</button>
-                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
                                                 <button type="button" class="btn btn-success">Join</button>
                                             </td>
                                         </tr>
-
-
 
                                     </tbody>
                                 </table>
@@ -374,6 +474,9 @@
     <script src="~/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
+
+    <!-- Modal -->
+    <script src="~/dist/js/modal.js"></script>
     <!-- page script -->
     <script>
   $(function () {

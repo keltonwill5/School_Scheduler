@@ -289,31 +289,126 @@
                                         <label for="exampleInputEmail1">Contact Person (Event Manager)</label>
                                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Point of Contact">
                                     </div>
+                                    
+                                    <label>Add new members (minimum of 5)</label>
+                                    <select class="form-control" id="pm" onchange="reveal()">
+                                        <option value=0>Select How Many Members to add to new RSO</option>
+                                        <option value=1>5</option>
+                                        <option value=2>6</option>
+                                        <option value=3>7</option>
+                                        <option value=4>8</option>
+                                        <option value=5>9</option>
+                                        <option value=6>10</option>
+                                    </select>
+                                    <br>
 
-                                    <div class="form-group">
-                                        <label>Contact Phone:</label>
+                                    <div id="mydiv1" style="display:none">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name"> 
 
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
+                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="six" disabled="disabled">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="seven" disabled="disabled">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="eight" disabled="disabled">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="nine" disabled="disabled">
+                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="ten" disabled="disabled"> 
+                                        <br />                
+                                    </div>
+
+                                        <script type="text/javascript">
+                                            function reveal() {
+
+                                                var p = document.getElementById("pm").value;
+
+                                                if (p == 1) {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = true;
+                                                    document.getElementById("seven").disabled = true;
+                                                    document.getElementById("eight").disabled = true;
+                                                    document.getElementById("nine").disabled = true;
+                                                    document.getElementById("ten").disabled = true;
+                                                }
+
+                                                else if (p == 2)
+                                                {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = false;
+                                                    document.getElementById("seven").disabled = true;
+                                                    document.getElementById("eight").disabled = true;
+                                                    document.getElementById("nine").disabled = true;
+                                                    document.getElementById("ten").disabled = true;
+                                                }
+
+                                                else if (p == 3)
+                                                {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = false;
+                                                    document.getElementById("seven").disabled = false;
+                                                    document.getElementById("eight").disabled = true;
+                                                    document.getElementById("nine").disabled = true;
+                                                    document.getElementById("ten").disabled = true;
+                                                }
+
+                                                else if (p == 4) {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = false;
+                                                    document.getElementById("seven").disabled = false;
+                                                    document.getElementById("eight").disabled = false;
+                                                    document.getElementById("nine").disabled = true;
+                                                    document.getElementById("ten").disabled = true;
+                                                }
+
+                                                else if (p == 5) {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = false;
+                                                    document.getElementById("seven").disabled = false;
+                                                    document.getElementById("eight").disabled = false;
+                                                    document.getElementById("nine").disabled = false;
+                                                    document.getElementById("ten").disabled = true;
+                                                }
+
+                                                else if (p == 6) {
+                                                    document.getElementById("mydiv1").style.display = "block"
+                                                    document.getElementById("six").disabled = false;
+                                                    document.getElementById("seven").disabled = false;
+                                                    document.getElementById("eight").disabled = false;
+                                                    document.getElementById("nine").disabled = false;
+                                                    document.getElementById("ten").disabled = false;
+                                                }
+
+                                                else {
+                                                    document.getElementById("mydiv1").style.display = "none"
+                                                }
+                                            }
+                                        </script>
+
+                                        <div class="form-group">
+                                            <label>Contact Phone:</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
+                                                </div>
+                                                <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Contact Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                        </div>
+
+                                        <!-- /.input group -->
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact Email</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                    </div>
-
-                                    <!-- /.input group -->
-                                </div>
-                                <!-- /.input group -->
-                                <!-- /.box-body -->
-
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                                        <!-- /.input group -->
+                                        <!-- /.box-body -->
+                                        
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
                             </form>
                         </div>
                     </div>
@@ -492,6 +587,7 @@
         showInputs: false
       });
     });
+    
     </script>
 </body>
 

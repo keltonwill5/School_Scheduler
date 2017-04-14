@@ -625,6 +625,8 @@
     <Content Include="css\bootstrap-slider.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
+    <Content Include="dist\css\modal.css" />
+    <Content Include="dist\js\modal.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -1434,7 +1436,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="bootstrap\" />
     <Folder Include="build\" />
-    <Folder Include="dist\" />
     <Folder Include="Models\" />
     <Folder Include="plugins\" />
     <Folder Include="Views\ViewSchools\" />
