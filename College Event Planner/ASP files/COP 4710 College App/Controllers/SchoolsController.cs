@@ -10,6 +10,8 @@ namespace COP_4710_College_App.Controllers
     {
         public ActionResult ViewSchools()
         {
+            Models.SchoolData.addSchool("Change", "Change", "Change", "Change");
+
 
             return View();
         }
