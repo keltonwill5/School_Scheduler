@@ -10,12 +10,10 @@ namespace COP_4710_College_App.Models
 
         public int id { get; set; }
         public string name { get; set; }
-        public int createDate { get; set; }
-        public int createTime { get; set; }
+        public DateTime createDate { get; set; }
         public string description { get; set; }
         public int categoryId { get; set; }
-        public int time { get; set; }
-        public int date { get; set; }
+        public DateTime time { get; set; }
         public string location { get; set; }
         public string contactPhone { get; set; }
         public string contactEmail { get; set; }

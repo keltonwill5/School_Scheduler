@@ -9,8 +9,7 @@ namespace COP_4710_College_App.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        public int createDate { get; set; }
-        public int createTime { get; set; }
+        public DateTime createDate { get; set; }
         public string address { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
