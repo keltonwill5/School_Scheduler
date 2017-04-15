@@ -1,0 +1,125 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Configuration;
+using System.Data.Odbc;
+
+namespace COP_4710_College_App.Models
+{
+    public class SchoolViewModel
+    {
+    	public int ID
+        public string name;
+        public string address;
+        public string phone;
+        public string email;
+    }
+
+    public class addSchool
+    {
+    	public IEnumerable<SchoolViewModel> DataPull(string nameVar, string addressVar, string phoneVar, string emailVar)
+    	{
+            using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.Connectionstrings["Database"].Connectionstring))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("INSERT INTO school VALUES (\'\"+nameVar+"\'\,CURDATE()+0,CURTIME()+0,\'\"+addressVar+"\'\,\'\"+phoneVar+"\'\,\'\"+emailVar+"\'\), connection))
+                using (OdbcDataReader dr = command.ExecuteReader())
+                {
+                    dr.Close();
+                }
+                connection.Close();
+            }
+        }
+    }
+    public class modifySchool
+    {
+    	public IEnumerable<SchoolViewModel> DataPull(int schoolID, string nameVar, string addressVar, string phoneVar, string emailVar)
+    	{
+            using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.Connectionstrings["Database"].Connectionstring))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("UPDATE school SET address=\'\"+addressVar+"\'\,phone=\'\"+phoneVar+"\'\email=\'\"+emailVar+"\'\name=\'\"+nameVar+"\'\ WHERE ID = " schoolID, connection))
+                using (OdbcDataReader dr = command.ExecuteReader())
+                {
+                    dr.Close();
+                }
+                connection.Close();
+            }
+        }
+    }
+
+    public class deleteSchool
+    {
+    	public IEnumerable<SchoolViewModel> DataPull(int schoolID)
+    	{
+            using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.Connectionstrings["Database"].Connectionstring))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("DELETE FROM school WHERE ID = " schoolID, connection))
+                using (OdbcDataReader dr = command.ExecuteReader())
+                {
+                    dr.Close();
+                }
+                connection.Close();
+            }
+        }
+    }
+
+    public class searchSchools
+    {
+    	public IEnumerable<SchoolViewModel> DataPull(string searchTerm)
+    	{
+            using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.Connectionstrings["Database"].Connectionstring))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("SELECT name, address, phone, email FROM Schoool WHERE name LIKE CONCAT(\'%'\,searchTerm,\'%'\) OR address LIKE CONCAT(\'%'\,searchTerm,\'%'\) OR phone LIKE CONCAT(\'%'\,searchTerm,\'%'\) OR email LIKE CONCAT(\'%'\,searchTerm,\'%'\)", connection))
+                using (OdbcDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        yield return new SchoolViewModel
+                        {
+                            name = dr.GetInt32(dr.GetOrdinal("ID")),
+                            name = dr.Getstring(dr.GetOrdinal("name")),
+                            name = dr.Getstring(dr.GetOrdinal("address")),
+                            name = dr.Getstring(dr.GetOrdinal("phone")),
+                            name = dr.Getstring(dr.GetOrdinal("email")),
+                        };
+                    }
+                    dr.Close();
+                }
+                connection.Close();
+            }
+        }
+    }
+
+    public class viewSchools
+    { 
+        public IEnumerable<SchoolViewModel> DataPull()
+        { 
+            using (OdbcConnection connection = new OdbcConnection(ConfigurationManager.Connectionstrings["Database"].Connectionstring))
+            {
+                connection.Open();
+                using (OdbcCommand command = new OdbcCommand("SELECT id, name, address, phone, email FROM School", connection))
+                using (OdbcDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        yield return new SchoolViewModel
+                        {
+                            id = dr.GetInt32(dr.GetOrdinal("ID")),
+                            name = dr.Getstring(dr.GetOrdinal("name")),
+                            address = dr.Getstring(dr.GetOrdinal("address")),
+                            phone = dr.Getstring(dr.GetOrdinal("phone")),
+                            email = dr.Getstring(dr.GetOrdinal("email")),
+                        };
+                    }
+                    dr.Close();
+                }
+                connection.Close();
+            }
+        }
+    }
+}
