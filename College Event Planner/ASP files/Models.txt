@@ -1,0 +1,201 @@
+MEMBERS
+
+public static List<MembersViewModel> viewMembers()
+        {
+            List<MembersViewModel> members = new List<MembersViewModel>();
+            MembersViewModel member = new MembersViewModel();
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    member.id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    member.firstName = reader.GetString(reader.GetOrdinal("firstName"));
+                    member.lastName = reader.GetString(reader.GetOrdinal("lastName"));
+                    member.picture = reader.GetString(reader.GetOrdinal("picture"));
+                    member.createDate = reader.GetInt32(reader.GetOrdinal("createDate"));
+                    member.createTime = reader.GetInt32(reader.GetOrdinal("createTime"));
+                    member.email = reader.GetString(reader.GetOrdinal("email"));
+                    member.password = reader.GetString(reader.GetOrdinal("password"));
+                    member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
+                    member.userTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"));
+                    members.Add(member);
+                    return members;
+                }
+            }
+
+public static void deleteMember(int memberID)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "DELETE FROM members WHERE ID = @Id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", memberID);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+public static void modifyMember(int memberId, string firstVar, string lastVar, string pictureVar, string emailVar, string passwordVar, string schoolNameVar, string userTypeVar)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "UPDATE members SET firstName=@firstName, lastName=@lastName, picture=@picture, email=@email, password=@password, schoolNameId=(SELECT Id FROM school WHERE school.name=@schoolNameId), userTypeId=(SELECT Id FROM user_type WHERE user_type.type=@userTypeId) WHERE id = @id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", memberId);
+                cmd.Parameters.AddWithValue("@firstName", firstVar);
+                cmd.Parameters.AddWithValue("@lastName", lastVar);
+                cmd.Parameters.AddWithValue("@picture", pictureVar);
+                cmd.Parameters.AddWithValue("@email", emailVar);
+                cmd.Parameters.AddWithValue("@password", passwordVar);
+                cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+                cmd.Parameters.AddWithValue("@userTypeId", userTypeVar);
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+        
+RSO
+
+public static List<RsoViewModel> viewRSO()
+        {
+            List<RsoViewModel> rsos = new List<RsoViewModel>();
+            RsoViewModel rso = new RsoViewModel();
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM rso JOIN school ON rso.schoolNameId = school.id JOIN rso_type ON rso.typeId = rso_type.id JOIN members ON rso.memberId = members.Id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    rso.id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    rso.name = reader.GetString(reader.GetOrdinal("name"));
+                    rso.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
+                    rso.typeId = reader.GetInt32(reader.GetOrdinal("typeId"));
+                    rso.contactName = reader.GetString(reader.GetOrdinal("contactName"));
+                    rso.contactPhone = reader.GetString(reader.GetOrdinal("contactPhone"));
+                    rso.contactEmail = reader.GetString(reader.GetOrdinal("contactEmail"));
+                    rso.description = reader.GetString(reader.GetOrdinal("description"));
+                    rso.memberId = reader.GetInt32(reader.GetOrdinal("memberId"));
+                    rsos.Add(rso);
+                    return rsos;
+                }
+            }
+
+public static void deleteRSO(int rsoID)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "DELETE FROM rso WHERE ID = @Id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", rsoID);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+public static void modifyRSO(int rsoID, string nameVar, string schoolNameVar, string typeVar, string contactNameVar, string phoneVar, string emailVar, string descVar, int memberVar)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "UPDATE rso SET name=@name, schoolNameId=(SELECT Id FROM school WHERE school.name=@schoolNameId), typeId=(SELECT Id FROM rso_type WHERE rso_type.type=@typeId), contactName=@contactName, contactPhone=@phone, contactEmail=@email, description=@description, memberId=(SELECT Id FROM members WHERE members.Id = @memberId) WHERE id = @id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", rsoId);
+                cmd.Parameters.AddWithValue("@name", nameVar);
+                cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+                cmd.Parameters.AddWithValue("@typeId", typeVar);
+                cmd.Parameters.AddWithValue("@contactName", contactNameVar);
+                cmd.Parameters.AddWithValue("@contactPhone", phoneVar);
+                cmd.Parameters.AddWithValue("@contactEmail", emailVar);
+                cmd.Parameters.AddWithValue("@description", descVar);
+                cmd.Parameters.AddWithValue("@memberId", memberVar);
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+
+EVENTS
+
+public static List<EventsViewModel> viewEvents()
+        {
+            List<EventsViewModel> events = new List<EventsViewModel>();
+            EventsViewModel event = new EventsViewModel();
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM events JOIN school ON events.schoolNameId = school.id JOIN user_type ON events.privacyId = user_type.id JOIN event_category ON events.categoryId = event_category.Id JOIN rso ON events.rsoNameId = rso.Id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    event.id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    event.name = reader.GetString(reader.GetOrdinal("name"));
+                    event.createDate = reader.GetInt32(reader.GetOrdinal("createDate"));
+                    event.createTime = reader.GetInt32(reader.GetOrdinal("createTime"));
+                    event.description = reader.GetString(reader.GetOrdinal("description"));
+                    event.categoryId = reader.GetInt32(reader.GetOrdinal("categoryId"));
+                    event.time = reader.GetInt32(reader.GetOrdinal("time"));
+                    event.date = reader.GetInt32(reader.GetOrdinal("date"));
+                    event.location = reader.GetString(reader.GetOrdinal("location"));
+                    event.contactPhone = reader.GetString(reader.GetOrdinal("contactPhone"));
+                    event.contactEmail = reader.GetString(reader.GetOrdinal("contactEmail"));
+                    event.privacyId = reader.GetInt32(reader.GetOrdinal("privacyId"));
+                    event.schoolNameID = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
+                    event.rsoNameId = reader.GetInt32(reader.GetOrdinal("rosNameId"));
+                    event.comments = reader.GetString(reader.GetOrdinal("comments"));
+                    event.rating = reader.GetString(reader.GetOrdinal("rating"));
+                    events.Add(event);
+                    return events;
+                }
+            }
+
+public static void deleteEvent(int eventID)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "DELETE FROM events WHERE ID = @Id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", eventID);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+public static void modifyEvent(int eventId, string nameVar, string descVar, string categoryVar, int timeVar, int dateVar, string locationVar, string phoneVar, string emailVar, string privacyVar, string schoolNameVar, string rsoNameVar, string commentsVar, string ratingVar)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "UPDATE rso SET name=@name, description=@description, categoryId=(SELECT Id FROM event_category WHERE event_category.category=@categoryId), time=@time, date=@date, location=@location, contactPhone=@contactPhone, contactEmail=@contactEmail, privacyId=(SELECT Id FROM user_type WHERE user_type.type=@privacyId), schoolNameId=(SELECT Id FROM school WHERE school.name=@schoolNameId), rsoNameId=(SELECT Id FROM rso WHERE rso.name=@rsoNameId), comments=@comments, rating=@rating WHERE id = @id";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@Id", eventId);
+                cmd.Parameters.AddWithValue("@name", nameVar);
+                cmd.Parameters.AddWithValue("@description", descVar);
+                cmd.Parameters.AddWithValue("@categoryId", categoryVar);
+                cmd.Parameters.AddWithValue("@time", timeVar);
+                cmd.Parameters.AddWithValue("@date", dateVar);
+                cmd.Parameters.AddWithValue("@location", locationVar);
+                cmd.Parameters.AddWithValue("@contactPhone", phoneVar);
+                cmd.Parameters.AddWithValue("@contactEmail", emailVar);
+                cmd.Parameters.AddWithValue("@privacyId", privacyVar);
+                cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+                cmd.Parameters.AddWithValue("@rsoNameId", rsoNameVar);
+                cmd.Parameters.AddWithValue("@comments", comments);
+                cmd.Parameters.AddWithValue("@rating", rating);
+                cmd.ExecuteNonQuery();
+            }
+
+        }
+
