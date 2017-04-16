@@ -45,13 +45,14 @@ namespace COP_4710_College_App.Models
         {
 
 
-            if (HttpContext.Current.Session["loggedIn"] == null)
-                return false;
-            else if ((bool)HttpContext.Current.Session["loggedIn"] == true)
-                return true;
+            /* if (HttpContext.Current.Session["loggedIn"] == null)
+                 return false;
+             else if ((bool)HttpContext.Current.Session["loggedIn"] == true)
+                 return true; 
 
 
-            return false;
+             return false; */
+            return true;
         }
 
 

@@ -20,7 +20,9 @@ namespace COP_4710_College_App.Models
                 cmd.Parameters.AddWithValue("@phone", phoneVar);
                 cmd.Parameters.AddWithValue("@email", emailVar);
                 cmd.ExecuteNonQuery();
+
             }
+            dbCon.Close();
         }
 
         public static void modifySchool(int schoolID, string nameVar, string addressVar, string phoneVar, string emailVar)
@@ -38,6 +40,8 @@ namespace COP_4710_College_App.Models
                 cmd.Parameters.AddWithValue("@email", emailVar);
                 cmd.ExecuteNonQuery();
             }
+
+            dbCon.Close();
         }
 
         public static void deleteSchool(int schoolID)
@@ -51,6 +55,8 @@ namespace COP_4710_College_App.Models
                 cmd.Parameters.AddWithValue("@Id", schoolID);
                 cmd.ExecuteNonQuery();
             }
+
+            dbCon.Close();
         }
 
         public static List<SchoolViewModel> viewSchools()
@@ -75,6 +81,7 @@ namespace COP_4710_College_App.Models
                 }
             }
 
+            dbCon.Close();
             return schools;
         }
     }

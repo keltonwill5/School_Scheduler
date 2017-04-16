@@ -33,23 +33,19 @@ namespace COP_4710_College_App.Models
 
         public bool IsConnect()
         {
-            bool result = true;
-            if (Connection == null)
-            {
-                if (string.IsNullOrEmpty(databaseName))
-                    result = false;
-                string connstring = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
-                connection = new MySqlConnection(connstring);
-                connection.Open();
-                result = true;
-            }
+            if (string.IsNullOrEmpty(databaseName))
+                return false;
 
-            return result;
+            string connstring = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            connection = new MySqlConnection(connstring);
+            connection.Open();
+
+            return true;
         }
 
         public void Close()
         {
-            connection.Close();
+            Connection.Close();
         }
     }
 }

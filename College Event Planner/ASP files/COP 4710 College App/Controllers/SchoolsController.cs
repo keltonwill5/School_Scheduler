@@ -12,7 +12,7 @@ namespace COP_4710_College_App.Controllers
         public int id { get; set; }
         public string name { get; set; }
         public DateTime createDate { get; set; }
-        public string address { get; set; }
+        public string address { get; set; } 
         public string phone { get; set; }
         public string email { get; set; }
 
