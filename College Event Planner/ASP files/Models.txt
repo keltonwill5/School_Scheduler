@@ -17,7 +17,6 @@ public static List<MembersViewModel> viewMembers()
                     member.lastName = reader.GetString(reader.GetOrdinal("lastName"));
                     member.picture = reader.GetString(reader.GetOrdinal("picture"));
                     member.createDate = reader.GetInt32(reader.GetOrdinal("createDate"));
-                    member.createTime = reader.GetInt32(reader.GetOrdinal("createTime"));
                     member.email = reader.GetString(reader.GetOrdinal("email"));
                     member.password = reader.GetString(reader.GetOrdinal("password"));
                     member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
@@ -141,7 +140,6 @@ public static List<EventsViewModel> viewEvents()
                     event.id = reader.GetInt32(reader.GetOrdinal("Id"));
                     event.name = reader.GetString(reader.GetOrdinal("name"));
                     event.createDate = reader.GetInt32(reader.GetOrdinal("createDate"));
-                    event.createTime = reader.GetInt32(reader.GetOrdinal("createTime"));
                     event.description = reader.GetString(reader.GetOrdinal("description"));
                     event.categoryId = reader.GetInt32(reader.GetOrdinal("categoryId"));
                     event.time = reader.GetInt32(reader.GetOrdinal("time"));
