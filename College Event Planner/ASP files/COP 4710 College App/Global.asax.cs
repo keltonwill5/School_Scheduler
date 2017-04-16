@@ -11,6 +11,7 @@ namespace COP_4710_College_App
     {
         protected void Application_Start()
         {
+            
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

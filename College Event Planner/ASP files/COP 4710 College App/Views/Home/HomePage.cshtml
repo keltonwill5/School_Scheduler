@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Super Administrator Board</title>
+    <title>@Session["privilege"] Board</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -33,11 +33,11 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="../Home/HomePage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>-SU</span>
+                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png" /></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Super</b>Admin</span>
+                <span class="logo-lg">@Session["privilege"]</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -86,17 +86,17 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../Images/aris.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Aris Socorro</span>
+                                <img src="../../Images/stickman.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@Session["name"]</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../../Images/aris.jpg" class="img-circle" alt="User Image">
+                                    <img src="../../Images/stickman.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Aris Socorro - Super Administrator
-                                        <small>Member since Feb. 5th, 2017</small>
+                                        @Session["name"] - @Session["privilege"]
+                                        <small>Member since @Session["createdDate"]</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -127,10 +127,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../../Images/aris.jpg" class="img-circle" alt="User Image">
+                        <img src="../../Images/stickman.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Aris Socorro</p>
+                        <p>@Session["name"]</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -155,29 +155,34 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-university"></i> <span>Schools</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">5</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
-                            </ul>
-                        </a>
-                    </li>
-
+                    @if ((int)Session["privilegeID"] > 1)
+                    {
+                        <li>
+                            <a href="pages/calendar.html">
+                                <i class="fa fa-university"></i> <span>Schools</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numSchools"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
+                                    <li><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
+                                </ul>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a href="pages/calendar.html">
                             <i class="fa fa-calendar"></i> <span>Events</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">10</small>
+                                <small class="label pull-right bg-green">@Session["numEvents"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                @if ((int)Session["privilegeID"] > 0)
+                                {
+                                    <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
+                                    <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                }
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
                             </ul>
                         </a>
@@ -187,10 +192,10 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-users"></i> <span>Users</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">600</small>
+                                <small class="label pull-right bg-green">@Session["numMembers"]</small>
                             </span>
                             <ul class="treeview-menu">
-                                <li><a href="Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
+                                <li><a href="../Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
                             </ul>
                         </a>
                     </li>
@@ -199,11 +204,14 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-archive"></i> <span>Organizations</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">20</small>
+                                <small class="label pull-right bg-green">@Session["numOrg"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Organization/AddOrganizations"><i class="fa fa-circle-o"></i>Add</a></li>
+                                @if ((int)Session["privilegeID"] > 0)
+                                {
+                                    <li><a href="~/Organization/AddOrganizations"><i id="AdminAddOrg" name="AdminAddOrg" class="fa fa-circle-o"></i>Add</a></li>
+                                }
                             </ul>
                         </a>
                     </li>
@@ -227,27 +235,31 @@
             <!-- Main content -->
             <section class="content">
                 <!-- Info boxes -->
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
-                            <div class="info-box-content">
-                                <span class="info-box-text">Modified Events</span>
-                                <span class="info-box-number">5</span>
+                <div class="row">
+                    @if ((int)Session["privilegeID"] > 1)
+                    {
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Modified Events</span>
+                                    <span class="info-box-number">5</span>
+                                </div>
+                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box-content -->
+                            <!-- /.info-box -->
                         </div>
-                        <!-- /.info-box -->
-                    </div>
+                    }
                     <!-- /.col -->
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                             <span class="info-box-icon bg-red"><i class="fa fa-calendar"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">New Events</span>
-                                <span class="info-box-number">200</span>
+                                <span class="info-box-text">Total Events</span>
+                                <span class="info-box-number">@Session["numEvents"]</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -263,7 +275,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Registered Schools</span>
-                                <span class="info-box-number">4</span>
+                                <span class="info-box-number">@Session["numSchools"]</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -276,7 +288,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Members</span>
-                                <span class="info-box-number">500</span>
+                                <span class="info-box-number">@Session["numMembers"]</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -302,7 +314,7 @@
                                         <h3 class="box-title">Latest Members</h3>
 
                                         <div class="box-tools pull-right">
-                                            <span class="label label-danger">8 New Members</span>
+                                            <!--<span class="label label-danger">8 New Members</span>-->
                                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                                 <i class="fa fa-minus"></i>
                                             </button>
@@ -359,7 +371,7 @@
                                     </div>
                                     <!-- /.box-body -->
                                     <div class="box-footer text-center">
-                                        <a href="javascript:void(0)" class="uppercase">View All Users</a>
+                                        <a href="../Users/ViewUsers" class="uppercase">View All Users</a>
                                     </div>
                                     <!-- /.box-footer -->
                                 </div>
@@ -425,8 +437,8 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer clearfix">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Create New Event</a>
-                                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Events</a>
+                                <a href="../Events/AddEvents" class="btn btn-sm btn-info btn-flat pull-left">Create New Event</a>
+                                <a href="../Events/ViewEvents" class="btn btn-sm btn-default btn-flat pull-right">View All Events</a>
                             </div>
                             <!-- /.box-footer -->
                         </div>

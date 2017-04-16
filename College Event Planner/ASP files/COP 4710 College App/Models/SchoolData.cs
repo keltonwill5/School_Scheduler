@@ -15,7 +15,7 @@ namespace COP_4710_College_App.Models
                 var cmd = new MySqlCommand(query, dbCon.Connection);
 
                 cmd.Parameters.AddWithValue("@name", nameVar);
-                cmd.Parameters.AddWithValue("@createDate", DateTime.Today);
+                cmd.Parameters.AddWithValue("@createDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@address", addressVar);
                 cmd.Parameters.AddWithValue("@phone", phoneVar);
                 cmd.Parameters.AddWithValue("@email", emailVar);

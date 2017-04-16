@@ -1399,6 +1399,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SessionHandler.cs" />
     <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Models\EventsViewModel.cs" />
     <Compile Include="Models\MembersViewModel.cs" />
