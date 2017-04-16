@@ -1435,6 +1435,7 @@
     <Content Include="Views\Users\ViewUsers.cshtml" />
     <Content Include="Views\Organizations\ViewOrganizations.cshtml" />
     <Content Include="Views\Organizations\AddOrganizations.cshtml" />
+    <Content Include="Views\Home\SignupPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
