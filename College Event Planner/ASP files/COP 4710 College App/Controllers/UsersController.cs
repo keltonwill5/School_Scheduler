@@ -18,34 +18,27 @@ namespace COP_4710_College_App.Controllers
             }
             //ViewBag.users = something when i get code
             //get school names
-            ViewBag.users = new List<Models.MembersViewModel>();
-            ViewBag.schoolNames = new List<string>()
+            ViewBag.users = Models.MembersData.viewMembers();
+            Session["numMembers"] = ViewBag.users.Count;
+            ViewBag.schools = Models.SchoolData.viewSchools();
+            Session["numSchools"] = ViewBag.schools.Count;
+            ViewBag.schoolNames = new List<string>();
+            foreach(var item in ViewBag.schools)
             {
-                "yes",
-                "no",
-                "kill me",
-                "Why am I up right now"
-            };
-            for (int i = 1; i < 10; i++)
-            {
-                Models.MembersViewModel temp = new Models.MembersViewModel();
-                temp.id = i;
-                temp.firstName = "" + i;
-                temp.lastName = "" + i;
-                temp.picture = "" + i;
-                temp.createDate = DateTime.Today;
-                temp.createTime = DateTime.Now;
-                temp.email = "" + i;
-                temp.password = "" + i;
-                temp.schoolNameId = i%2+2;
-                temp.userTypeId = 1;
-
-                ViewBag.users.Add(temp);
+                ViewBag.schoolNames.Add(item.name);
             }
 
 
 
             return View();
         }
-    }
+
+        public ActionResult DeleteUser(string DeleteUserBtn)
+        {
+            Models.MembersData.deleteMember(int.Parse(DeleteUserBtn));
+
+            return RedirectToAction("ViewUsers");
+        }
+
+        }
 }

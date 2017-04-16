@@ -6,15 +6,15 @@ using System.Web.Mvc;
 
 namespace COP_4710_College_App.Controllers
 {
+    
+
+
     public class HomeController : Controller
     {
-        // GET: Home
+      // GET: Home
         [HttpGet]
         public ActionResult LoginPage()
         {
-            Session["loggedIn"] = true;
-            Session["privilegeID"] = 2;
-
             if (Models.SessionHandler.loggedIn())
                 return RedirectToAction("HomePage");
             else
@@ -27,10 +27,16 @@ namespace COP_4710_College_App.Controllers
         [HttpPost]
         public ActionResult LoginPage(string email, string password)
         {
-            if (Models.SessionHandler.tryLogin(email, password))
+            if (Models.MembersData.loginMember(email,password))
             {
+                Models.MembersViewModel cur_user = Models.MembersData.getMember(email);
                 Session["loggedIn"] = true;
-                Session["privilegeID"] = 2;
+
+                Session["name"] = cur_user.firstName + cur_user.lastName;
+                Session["schoolID"] = cur_user.schoolNameId;
+                Session["privilege"] = Models.MembersData.getTitle(cur_user.userTypeId);
+                Session["privilegeID"] = cur_user.userTypeId;
+                Session["createdDate"]
                 return RedirectToAction("HomePage");
             }
             return View();
@@ -39,14 +45,14 @@ namespace COP_4710_College_App.Controllers
         [HttpGet]
         public ActionResult HomePage()
         {
-            if(Models.SessionHandler.loggedIn() == false)
+            if(!Models.SessionHandler.loggedIn())
             {
                 return RedirectToAction("LoginPage");
             }
 
             ViewBag.schools = Models.SchoolData.viewSchools();
             Session["numSchools"] = ViewBag.schools.Count;
-            //get number of schools
+            
             //get number of events
             //get number of modified events?
             //get number of members
@@ -60,15 +66,31 @@ namespace COP_4710_College_App.Controllers
         [HttpGet]
         public ActionResult SignupPage()
         {
-
+            ViewBag.schools = Models.SchoolData.viewSchools();
+            
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignupPage(string email, string firstname, string lastname, string password)
+        public ActionResult SignupPage(string email, string firstname, string lastname, string password, string school)
         {
-            //Validate
-            return RedirectToAction("HomePage");
+            if (Models.MembersData.checkExist(email))
+                return View();
+            else
+            {
+                Models.MembersData.addMember(firstname, lastname, "../Images/stickman.jpg", email, password,school,"Student");
+
+                Models.MembersViewModel cur_user = Models.MembersData.getMember(email);
+                Session["loggedIn"] = true;
+
+                Session["name"] = cur_user.firstName + cur_user.lastName;
+                Session["schoolID"] = cur_user.schoolNameId;
+                Session["privilege"] = Models.MembersData.getTitle(cur_user.userTypeId);
+                Session["privilegeID"] = cur_user.userTypeId;
+                Session["createdDate"] = cur_user.createDate.ToString("MM/dd/yyyy");
+
+                return RedirectToAction("HomePage");
+            }
         }
 
 

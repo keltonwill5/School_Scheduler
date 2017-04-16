@@ -325,8 +325,9 @@
                                                     {
                                                         <button id="DeleteBtn" value="@item.id" name="DeleteBtn" type="submit" class="btn btn-danger">Delete</button>
                                                     }
-                                                    <button id="ModifyBtn"  value="@item.id" name="ModifyBtn" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button>
-                                                </td>
+                                                    <button id="ModifyBtn"  value="@item.id" name="ModifyBtn" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button> <!--onclick="location.href='@Url.Action("setModifyID","" -->
+                                                    
+                                               </td>
                                             </tr>
                                         }
 

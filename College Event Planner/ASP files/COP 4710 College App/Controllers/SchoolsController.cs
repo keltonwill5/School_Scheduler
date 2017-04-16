@@ -6,41 +6,7 @@ using System.Web.Mvc;
 
 namespace COP_4710_College_App.Controllers
 {
-    /*
-    public class skool
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public DateTime createDate { get; set; }
-        public string address { get; set; } 
-        public string phone { get; set; }
-        public string email { get; set; }
-
-        public skool(Models.SchoolViewModel data)
-        {
-            id = data.id;
-            name = data.name;
-            createDate = data.createDate;
-            address = data.address;
-            phone = data.phone;
-            email = data.email;
-        }
-
-        public static List<skool> skoolList(List<Models.SchoolViewModel> data)
-        {
-            List<skool> schools = new List<skool>();
-
-            foreach(Models.SchoolViewModel key in data)
-            {
-                schools.Add(new skool(key));
-            }
-
-            return schools;
-        }
-    }
-
-    */
-
+   
 
 
 
@@ -54,6 +20,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("LoginPage", "Home");
             }
             ViewBag.schools = Models.SchoolData.viewSchools();
+            Session["numSchools"] = ViewBag.schools.Count;
 
 
             return View();
@@ -91,7 +58,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("LoginPage", "Home");
             }
 
-            Models.SchoolData.modifySchool(1, SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
+            Models.SchoolData.modifySchool((int)Session["MODIFYID"], SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
 
 
 
@@ -111,5 +78,11 @@ namespace COP_4710_College_App.Controllers
 
             return RedirectToAction("ViewSchools");
         }
+/*
+        public Action setModifyID(string ModifyBtn)
+        {
+            Session["MODIFYID"] = int.Parse(ModifyBtn);
+        }
+        */
     }
 }

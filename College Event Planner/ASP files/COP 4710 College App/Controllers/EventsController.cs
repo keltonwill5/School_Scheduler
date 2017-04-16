@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace COP_4710_College_App.Controllers
 {
     public class EventsController : Controller
-    {
+    {   
         public ActionResult ViewEvents()
         {
             if (Models.SessionHandler.loggedIn() == false)

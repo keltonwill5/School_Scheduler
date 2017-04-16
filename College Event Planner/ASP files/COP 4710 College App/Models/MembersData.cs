@@ -95,5 +95,96 @@ namespace COP_4710_College_App.Models
             dbCon.Close();
             return members;
         }
+
+
+        public static Boolean loginMember(string emailVar, string passwordVar)
+        {
+            string query = null;
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                query = "SELECT Id FROM users WHERE users.email = @email AND users.password = @password";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@email", emailVar);
+                cmd.Parameters.AddWithValue("@password", passwordVar);
+            }
+            if (query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
+        public static Boolean checkExist(string emailVar)
+        {
+            string query = null;
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                query = "SELECT Id FROM users WHERE users.email = @email";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@email", emailVar);
+            }
+            if (query != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public static MembersViewModel getMember(string emailVar)
+        {
+            MembersViewModel member = new MembersViewModel();
+         
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+               
+                    member.id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    member.firstName = reader.GetString(reader.GetOrdinal("firstName"));
+                    member.lastName = reader.GetString(reader.GetOrdinal("lastName"));
+                    member.picture = reader.GetString(reader.GetOrdinal("picture"));
+                    member.createDate = reader.GetDateTime(reader.GetOrdinal("createDate"));
+                    member.email = reader.GetString(reader.GetOrdinal("email"));
+                    member.password = reader.GetString(reader.GetOrdinal("password"));
+                    member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
+                    member.userTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"));
+                    
+            }
+
+            dbCon.Close();
+            return member;
+        }
+
+        public static string getTitle(int ID)
+        {
+            switch (ID)
+            {
+                case 0:
+                    return "Student";
+                case 1:
+                    return "Admin";
+                case 2:
+                    return "SuperAdmin";
+                case 3:
+                    return "Dark Lord and Master";
+            }
+            return "";
+
+        }
     }
 }
