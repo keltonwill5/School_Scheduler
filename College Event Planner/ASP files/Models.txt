@@ -211,7 +211,7 @@ public static void addMember(string firstVar, string lastVar, string pictureVar,
             cmd.Parameters.AddWithValue("@firstName", firstVar);
             cmd.Parameters.AddWithValue("@lastName", lastVar);
             cmd.Parameters.AddWithValue("@picture", pictureVar);
-            cmd.Parameters.AddWithValue("@createDate", DateTime.Today);
+            cmd.Parameters.AddWithValue("@createDate", DateTime.Now);
             cmd.Parameters.AddWithValue("@email", emailVar);
             cmd.Parameters.AddWithValue("@password", passwordVar);
             cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
@@ -249,7 +249,7 @@ public static void addEvent(string nameVar, string descVar, string categoryVar, 
             var cmd = new MySqlCommand(query, dbCon.Connection);
 
                 cmd.Parameters.AddWithValue("@name", nameVar);
-                cmd.Parameters.AddWithValue("@createDate", DateTime.Today);
+                cmd.Parameters.AddWithValue("@createDate", DateTime.Now);
                 cmd.Parameters.AddWithValue("@description", descVar);
                 cmd.Parameters.AddWithValue("@categoryId", categoryVar);
                 cmd.Parameters.AddWithValue("@time", timeVar);

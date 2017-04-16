@@ -45,11 +45,11 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="../Home/HomePage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>-SU</span>
+                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png"/></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Super</b>Admin</span>
+                <span class="logo-lg">@Session["privilege"]</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -98,17 +98,17 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/Images/aris.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Aris Socorro</span>
+                                <img src="~/Images/stickman.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@Session["name"]</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="~/Images/aris.jpg" class="img-circle" alt="User Image">
+                                    <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Aris Socorro - Super Administrator
-                                        <small>Member since Feb. 5th, 2017</small>
+                                        @Session["name"] - @Session["privilege"]
+                                        <small>Member since @Session["createdDate"]</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -143,10 +143,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/Images/aris.jpg" class="img-circle" alt="User Image">
+                        <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Aris Socorro</p>
+                        <p>@Session["name"]</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-university"></i> <span>Schools</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">5</small>
+                                <small class="label pull-right bg-green">@Session["numSchools"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
@@ -188,7 +188,7 @@
                         <a href="">
                             <i class="fa fa-calendar"></i> <span>Events</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">10</small>
+                                <small class="label pull-right bg-green">@Session["numEvents"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
@@ -203,7 +203,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-users"></i> <span>Users</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">600</small>
+                                <small class="label pull-right bg-green">@Session["numMembers"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
@@ -215,7 +215,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-archive"></i> <span>Organizations</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">20</small>
+                                <small class="label pull-right bg-green">@Session["numOrg"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
@@ -254,9 +254,14 @@
                             <form role="form">
                                 <div class="box-body">
 
+
+
+
+
+                                    <!--POPULATE FROM DATABASE-->
                                     <div class="form-group">
                                         <label>School</label>
-                                        <select class="form-control">
+                                        <select id="SchoolName" name="SchoolName" class="form-control">
                                             <option>UCF</option>
                                             <option>FSU</option>
                                             <option>UM</option>
@@ -265,33 +270,33 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Name</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="GroupName" name="GroupName" placeholder="Enter name">
                                     </div>
 
                                     <div class="form-group">
                                         <label>Type</label>
-                                        <select class="form-control">
-                                            <option>Fraternity</option>
-                                            <option>Religious</option>
-                                            <option>Political</option>
-                                            <option>Academic</option>
-                                            <option>Recreational</option>
+                                        <select id="GroupType" name="GroupType" class="form-control">
+                                            <option value="Fraternity">Fraternity</option>
+                                            <option value="Religious">Religious</option>
+                                            <option value="Political">Political</option>
+                                            <option value="Academic">Academic</option>
+                                            <option value="Recreational">Recreational</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea class="form-control" rows="3" placeholder="What is this organization about?"></textarea>
+                                        <textarea id="Desc" name="Desc" class="form-control" rows="3" placeholder="What is this organization about?"></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact Person (Event Manager)</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Point of Contact">
+                                        <label for="ContactName">Contact Person (Event Manager)</label>
+                                        <input type="text" class="form-control" id="ContactName" name="ContactName" placeholder="Enter Point of Contact">
                                     </div>
                                     
                                     <label>Add new members (minimum of 5)</label>
-                                    <select class="form-control" id="pm" onchange="reveal()">
+                                    <select class="form-control" id="NumMem" name="NumMem" onchange="reveal()">
                                         <option value=0>Select How Many Members to add to new RSO</option>
                                         <option value=1>5</option>
                                         <option value=2>6</option>
@@ -303,84 +308,36 @@
                                     <br>
 
                                     <div id="mydiv1" style="display:none">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name"> 
+                                        <input id="Mem1" name="Mem1" type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input id="Mem2" name="Mem2" type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input id="Mem3" name="Mem3" type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input id="Mem4" name="Mem4" type="text" class="form-control" placeholder="Enter new member's name">
+                                        <input id="Mem5" name="Mem5" type="text" class="form-control" placeholder="Enter new member's name"> 
 
-                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="six" disabled="disabled">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="seven" disabled="disabled">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="eight" disabled="disabled">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="nine" disabled="disabled">
-                                        <input type="text" class="form-control" placeholder="Enter new member's name" id="ten" disabled="disabled"> 
+                                        <input id="Mem6" name="Mem6" type="text" class="form-control" placeholder="Enter new member's name" disabled="disabled">
+                                        <input id="Mem7" name="Mem7" type="text" class="form-control" placeholder="Enter new member's name"  disabled="disabled">
+                                        <input id="Mem8" name="Mem8" type="text" class="form-control" placeholder="Enter new member's name"  disabled="disabled">
+                                        <input id="Mem9" name="Mem9" type="text" class="form-control" placeholder="Enter new member's name"  disabled="disabled">
+                                        <input id="Mem10" name="Mem10" type="text" class="form-control" placeholder="Enter new member's name"  disabled="disabled"> 
                                         <br />                
                                     </div>
 
                                         <script type="text/javascript">
                                             function reveal() {
 
-                                                var p = document.getElementById("pm").value;
+                                                var p = document.getElementById("NumMem").value;
 
-                                                if (p == 1) {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = true;
-                                                    document.getElementById("seven").disabled = true;
-                                                    document.getElementById("eight").disabled = true;
-                                                    document.getElementById("nine").disabled = true;
-                                                    document.getElementById("ten").disabled = true;
-                                                }
-
-                                                else if (p == 2)
-                                                {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = false;
-                                                    document.getElementById("seven").disabled = true;
-                                                    document.getElementById("eight").disabled = true;
-                                                    document.getElementById("nine").disabled = true;
-                                                    document.getElementById("ten").disabled = true;
-                                                }
-
-                                                else if (p == 3)
-                                                {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = false;
-                                                    document.getElementById("seven").disabled = false;
-                                                    document.getElementById("eight").disabled = true;
-                                                    document.getElementById("nine").disabled = true;
-                                                    document.getElementById("ten").disabled = true;
-                                                }
-
-                                                else if (p == 4) {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = false;
-                                                    document.getElementById("seven").disabled = false;
-                                                    document.getElementById("eight").disabled = false;
-                                                    document.getElementById("nine").disabled = true;
-                                                    document.getElementById("ten").disabled = true;
-                                                }
-
-                                                else if (p == 5) {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = false;
-                                                    document.getElementById("seven").disabled = false;
-                                                    document.getElementById("eight").disabled = false;
-                                                    document.getElementById("nine").disabled = false;
-                                                    document.getElementById("ten").disabled = true;
-                                                }
-
-                                                else if (p == 6) {
-                                                    document.getElementById("mydiv1").style.display = "block"
-                                                    document.getElementById("six").disabled = false;
-                                                    document.getElementById("seven").disabled = false;
-                                                    document.getElementById("eight").disabled = false;
-                                                    document.getElementById("nine").disabled = false;
-                                                    document.getElementById("ten").disabled = false;
-                                                }
-
-                                                else {
+                                                document.getElementById("mydiv1").style.display = "block"
+                                                document.getElementById("Mem6").disabled = (p<=1);
+                                                document.getElementById("Mem7").disabled = (p <= 2);
+                                                document.getElementById("Mem8").disabled = (p <= 3);
+                                                document.getElementById("Mem9").disabled = (p <= 4);
+                                                document.getElementById("Mem10").disabled = (p <= 5);
+                                                
+                                                if(p> 6 || p< 1)
                                                     document.getElementById("mydiv1").style.display = "none"
-                                                }
+                                               
+                                               
                                             }
                                         </script>
 
@@ -391,13 +348,13 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
+                                                <input id="orgPhone" name="orgPhone" type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Contact Email</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                            <label for="OrgEmail">Contact Email</label>
+                                            <input type="email" class="form-control" id="OrgEmail" name="OrgEmail" placeholder="Enter email">
                                         </div>
 
                                         <!-- /.input group -->

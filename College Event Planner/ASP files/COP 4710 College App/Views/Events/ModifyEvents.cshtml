@@ -45,11 +45,11 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="../Home/HomePage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>-SU</span>
+                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png"/></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Super</b>Admin</span>
+                <span class="logo-lg">@Session["privilege"]</span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -98,17 +98,17 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/Images/aris.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Aris Socorro</span>
+                                <img src="~/Images/stickman.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@Session["name"]</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="~/Images/aris.jpg" class="img-circle" alt="User Image">
+                                    <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Aris Socorro - Super Administrator
-                                        <small>Member since Feb. 5th, 2017</small>
+                                        @Session["name"] - @Session["privilege"]
+                                        <small>Member since @Session["createdDate"]</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -143,10 +143,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/Images/aris.jpg" class="img-circle" alt="User Image">
+                        <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Aris Socorro</p>
+                        <p>@Session["name"]</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-university"></i> <span>Schools</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">5</small>
+                                <small class="label pull-right bg-green">@Session["numSchools"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
@@ -188,7 +188,7 @@
                         <a href="">
                             <i class="fa fa-calendar"></i> <span>Events</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">10</small>
+                                <small class="label pull-right bg-green">@Session["numEvents"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
@@ -203,7 +203,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-users"></i> <span>Users</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">600</small>
+                                <small class="label pull-right bg-green">@Session["numMembers"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
@@ -215,7 +215,7 @@
                         <a href="pages/calendar.html">
                             <i class="fa fa-archive"></i> <span>Organizations</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-green">20</small>
+                                <small class="label pull-right bg-green">@Session["numOrg"]</small>
                             </span>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>

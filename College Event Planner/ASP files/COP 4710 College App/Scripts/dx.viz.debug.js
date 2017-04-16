@@ -5668,7 +5668,7 @@
             errors = __webpack_require__( /*! ./errors */ 7),
             resizeCallbacks = __webpack_require__( /*! ./utils/window */ 37).resizeCallbacks,
             EventsMixin = __webpack_require__( /*! ./events_mixin */ 46),
-            SessionStorage = __webpack_require__( /*! ./utils/storage */ 49).sessionStorage,
+            Sessiontorage = __webpack_require__( /*! ./utils/storage */ 49).Sessiontorage,
             viewPort = __webpack_require__( /*! ./utils/view_port */ 50),
             Config = __webpack_require__( /*! ./config */ 13);
         var KNOWN_UA_TABLE = {
@@ -5781,10 +5781,10 @@
                     try {
                         deviceOrName = this._getDeviceOrNameFromWindowScope()
                     } catch (e) {
-                        deviceOrName = this._getDeviceNameFromSessionStorage()
+                        deviceOrName = this._getDeviceNameFromSessiontorage()
                     } finally {
                         if (!deviceOrName) {
-                            deviceOrName = this._getDeviceNameFromSessionStorage()
+                            deviceOrName = this._getDeviceNameFromSessiontorage()
                         }
                         if (deviceOrName) {
                             this._forced = true
@@ -5880,12 +5880,12 @@
                 }
                 return result
             },
-            _getDeviceNameFromSessionStorage: function() {
-                var sessionStorage = SessionStorage();
-                if (!sessionStorage) {
+            _getDeviceNameFromSessiontorage: function() {
+                var Sessiontorage = Sessiontorage();
+                if (!Sessiontorage) {
                     return
                 }
-                var deviceOrName = sessionStorage.getItem("dx-force-device");
+                var deviceOrName = Sessiontorage.getItem("dx-force-device");
                 try {
                     return $.parseJSON(deviceOrName)
                 } catch (ex) {
@@ -5954,14 +5954,14 @@
       !*** ./js/core/utils/storage.js ***!
       \**********************************/
     function(module, exports) {
-        var getSessionStorage = function() {
-            var sessionStorage;
+        var getSessiontorage = function() {
+            var Sessiontorage;
             try {
-                sessionStorage = window.sessionStorage
+                Sessiontorage = window.Sessiontorage
             } catch (e) {}
-            return sessionStorage
+            return Sessiontorage
         };
-        exports.sessionStorage = getSessionStorage
+        exports.Sessiontorage = getSessiontorage
     },
     /*!************************************!*\
       !*** ./js/core/utils/view_port.js ***!
@@ -15976,7 +15976,7 @@
             CommandMapping = __webpack_require__( /*! ./command_mapping */ 132),
             ViewCache = __webpack_require__( /*! ./view_cache */ 121),
             EventsMixin = __webpack_require__( /*! ../core/events_mixin */ 46),
-            sessionStorage = __webpack_require__( /*! ../core/utils/storage */ 49).sessionStorage,
+            Sessiontorage = __webpack_require__( /*! ../core/utils/storage */ 49).Sessiontorage,
             dataUtils = __webpack_require__( /*! ../data/utils */ 133),
             errors = __webpack_require__( /*! ./errors */ 118),
             when = __webpack_require__( /*! ../integration/jquery/deferred */ 14).when,
@@ -16003,7 +16003,7 @@
                 this.navigationManager.on("navigated", $.proxy(this._onNavigated, this));
                 this.navigationManager.on("navigationCanceled", $.proxy(this._onNavigationCanceled, this));
                 this.stateManager = options.stateManager || new StateManager({
-                    storage: options.stateStorage || sessionStorage()
+                    storage: options.stateStorage || Sessiontorage()
                 });
                 this.stateManager.addStateSource(this.navigationManager);
                 this.viewCache = this._createViewCache(options);
@@ -17069,7 +17069,7 @@
         var $ = __webpack_require__( /*! jquery */ 9),
             Class = __webpack_require__( /*! ../core/class */ 22),
             browserAdapters = __webpack_require__( /*! ./browser_adapters */ 131),
-            SessionStorage = __webpack_require__( /*! ../core/utils/storage */ 49).sessionStorage,
+            Sessiontorage = __webpack_require__( /*! ../core/utils/storage */ 49).Sessiontorage,
             devices = __webpack_require__( /*! ../core/devices */ 48);
         var SESSION_KEY = "dxPhoneJSApplication";
         var HistoryBasedNavigationDevice = Class.inherit({
@@ -17160,18 +17160,18 @@
                 return this.callBase(uri, !this._browserAdapter.isRootPage())
             },
             _saveBrowserState: function() {
-                var sessionStorage = SessionStorage();
-                if (sessionStorage) {
-                    sessionStorage.setItem(SESSION_KEY, true)
+                var Sessiontorage = Sessiontorage();
+                if (Sessiontorage) {
+                    Sessiontorage.setItem(SESSION_KEY, true)
                 }
             },
             _initRootPage: function() {
                 var hash = this.getUri(),
-                    sessionStorage = SessionStorage();
-                if (!sessionStorage || sessionStorage.getItem(SESSION_KEY)) {
+                    Sessiontorage = Sessiontorage();
+                if (!Sessiontorage || Sessiontorage.getItem(SESSION_KEY)) {
                     return $.Deferred().resolve().promise()
                 }
-                sessionStorage.removeItem(SESSION_KEY);
+                Sessiontorage.removeItem(SESSION_KEY);
                 this._browserAdapter.createRootPage();
                 return this._browserAdapter.pushState(hash)
             },

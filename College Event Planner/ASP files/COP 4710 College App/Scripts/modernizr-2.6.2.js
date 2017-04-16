@@ -818,10 +818,10 @@ window.Modernizr = (function( window, document, undefined ) {
         }
     };
 
-    tests['sessionstorage'] = function() {
+    tests['Sessiontorage'] = function() {
         try {
-            sessionStorage.setItem(mod, mod);
-            sessionStorage.removeItem(mod);
+            Sessiontorage.setItem(mod, mod);
+            Sessiontorage.removeItem(mod);
             return true;
         } catch(e) {
             return false;
