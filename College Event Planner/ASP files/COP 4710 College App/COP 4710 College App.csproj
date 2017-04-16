@@ -1400,8 +1400,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBConnection.cs" />
+    <Compile Include="Models\EventsData.cs" />
     <Compile Include="Models\EventsViewModel.cs" />
+    <Compile Include="Models\MembersData.cs" />
     <Compile Include="Models\MembersViewModel.cs" />
+    <Compile Include="Models\RsoData.cs" />
     <Compile Include="Models\RsoViewModel.cs" />
     <Compile Include="Models\SchoolData.cs" />
     <Compile Include="Models\SchoolViewModel.cs" />
