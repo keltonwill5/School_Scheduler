@@ -1,0 +1,47 @@
+
+        public static Boolean loginMember(string emailVar, string passwordVar)
+        {
+            string query = null;
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                query = "SELECT Id FROM users WHERE users.email = @email AND users.password = @password";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@email", emailVar);
+                cmd.Parameters.AddWithValue("@password", passwordVar);
+            }
+            if (query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        
+        
+        public static Boolean checkExist(string emailVar)
+        {
+            string query = null;
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                query = "SELECT Id FROM users WHERE users.email = @email;
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@email", emailVar);
+            }
+            if (query != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        
