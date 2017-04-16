@@ -22,8 +22,8 @@ public static List<MembersViewModel> viewMembers()
                     member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
                     member.userTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"));
                     members.Add(member);
-                    return members;
                 }
+            return members;
             }
 
 public static void deleteMember(int memberID)
@@ -84,8 +84,8 @@ public static List<RsoViewModel> viewRSO()
                     rso.description = reader.GetString(reader.GetOrdinal("description"));
                     rso.memberId = reader.GetInt32(reader.GetOrdinal("memberId"));
                     rsos.Add(rso);
-                    return rsos;
                 }
+                 return rsos;
             }
 
 public static void deleteRSO(int rsoID)
@@ -153,8 +153,8 @@ public static List<EventsViewModel> viewEvents()
                     event.comments = reader.GetString(reader.GetOrdinal("comments"));
                     event.rating = reader.GetString(reader.GetOrdinal("rating"));
                     events.Add(event);
-                    return events;
                 }
+                 return events;
             }
 
 public static void deleteEvent(int eventID)
