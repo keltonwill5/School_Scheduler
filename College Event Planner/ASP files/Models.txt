@@ -22,8 +22,8 @@ public static List<MembersViewModel> viewMembers()
                     member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
                     member.userTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"));
                     members.Add(member);
-                    return members;
                 }
+            return members;
             }
 
 public static void deleteMember(int memberID)
@@ -84,8 +84,8 @@ public static List<RsoViewModel> viewRSO()
                     rso.description = reader.GetString(reader.GetOrdinal("description"));
                     rso.memberId = reader.GetInt32(reader.GetOrdinal("memberId"));
                     rsos.Add(rso);
-                    return rsos;
                 }
+                 return rsos;
             }
 
 public static void deleteRSO(int rsoID)
@@ -153,8 +153,8 @@ public static List<EventsViewModel> viewEvents()
                     event.comments = reader.GetString(reader.GetOrdinal("comments"));
                     event.rating = reader.GetString(reader.GetOrdinal("rating"));
                     events.Add(event);
-                    return events;
                 }
+                 return events;
             }
 
 public static void deleteEvent(int eventID)
@@ -250,6 +250,72 @@ public static void addEvent(string nameVar, string descVar, string categoryVar, 
 
                 cmd.Parameters.AddWithValue("@name", nameVar);
                 cmd.Parameters.AddWithValue("@createDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@description", descVar);
+                cmd.Parameters.AddWithValue("@categoryId", categoryVar);
+                cmd.Parameters.AddWithValue("@time", timeVar);
+                cmd.Parameters.AddWithValue("@date", dateVar);
+                cmd.Parameters.AddWithValue("@location", locationVar);
+                cmd.Parameters.AddWithValue("@contactPhone", phoneVar);
+                cmd.Parameters.AddWithValue("@contactEmail", emailVar);
+                cmd.Parameters.AddWithValue("@privacyId", privacyVar);
+                cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+                cmd.Parameters.AddWithValue("@rsoNameId", rsoNameVar);
+                cmd.Parameters.AddWithValue("@comments", commentsVar);
+                cmd.Parameters.AddWithValue("@rating", ratingVar);
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+public static void addMember(string firstVar, string lastVar, string pictureVar, string emailVar, string passwordVar, string schoolNameVar, string userTypeVar)
+    {
+        var dbCon = DBConnection.Instance();
+        if (dbCon.IsConnect())
+        {
+            string query = "INSERT INTO members VALUES (null, @firstName, @lastName, @picture, @createDate, @email, @password, (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM user_type WHERE user_type.type=@userTypeId))";
+            var cmd = new MySqlCommand(query, dbCon.Connection);
+
+            cmd.Parameters.AddWithValue("@firstName", firstVar);
+            cmd.Parameters.AddWithValue("@lastName", lastVar);
+            cmd.Parameters.AddWithValue("@picture", pictureVar);
+            cmd.Parameters.AddWithValue("@createDate", DateTime.Today);
+            cmd.Parameters.AddWithValue("@email", emailVar);
+            cmd.Parameters.AddWithValue("@password", passwordVar);
+            cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+            cmd.Parameters.AddWithValue("@userTypeId", userTypeVar);
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+public static void addRSO(string nameVar, string schoolNameVar, string typeVar, string contactNameVar, string phoneVar, string emailVar, string descVar, int memberVar)
+    {
+        var dbCon = DBConnection.Instance();
+        if (dbCon.IsConnect())
+        {
+            string query = "INSERT INTO rso VALUES (null, @name, (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM rso_type WHERE rso_type.type=@typeId), @contactName, @contactPhone, @contactEmail, @description, (SELECT Id FROM members WHERE members.Id = @memberId))";
+            var cmd = new MySqlCommand(query, dbCon.Connection);
+
+            cmd.Parameters.AddWithValue("@name", nameVar);
+            cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
+            cmd.Parameters.AddWithValue("@typeId", typeVar);
+            cmd.Parameters.AddWithValue("@contactName", contactNameVar);
+            cmd.Parameters.AddWithValue("@contactPhone", phoneVar);
+            cmd.Parameters.AddWithValue("@contactEmail", emailVar);
+            cmd.Parameters.AddWithValue("@description", descVar);
+            cmd.Parameters.AddWithValue("@memberId", memberVar);
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+public static void addEvent(string nameVar, string descVar, string categoryVar, int timeVar, int dateVar, string locationVar, string phoneVar, string emailVar, string privacyVar, string schoolNameVar, string rsoNameVar, string commentsVar, string ratingVar)
+    {
+        var dbCon = DBConnection.Instance();
+        if (dbCon.IsConnect())
+        {
+            string query = "INSERT INTO events VALUES (null, @name, @createDate, @description, (SELECT Id FROM event_category WHERE event_category.category=@categoryId), @time, @date, @location, @contactPhone, @contactEmail, (SELECT Id FROM user_type WHERE user_type.type=@privacyId), (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM rso WHERE rso.name=@rsoNameId), @comments, @rating)";
+            var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@name", nameVar);
+                cmd.Parameters.AddWithValue("@createDate", DateTime.Today);
                 cmd.Parameters.AddWithValue("@description", descVar);
                 cmd.Parameters.AddWithValue("@categoryId", categoryVar);
                 cmd.Parameters.AddWithValue("@time", timeVar);

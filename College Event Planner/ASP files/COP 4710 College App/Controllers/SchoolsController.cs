@@ -51,10 +51,10 @@ namespace COP_4710_College_App.Controllers
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
             ViewBag.schools = Models.SchoolData.viewSchools();
-           
+
 
             return View();
         }
@@ -64,7 +64,7 @@ namespace COP_4710_College_App.Controllers
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
 
 
@@ -73,25 +73,43 @@ namespace COP_4710_College_App.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSchools(string schoolname, string address, string phonenumber, string email)
+        public ActionResult AddSchools(string schoolname, string address, string phonenumber, string schoolemail)
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
-            Models.SchoolData.addSchool(schoolname,address,phonenumber,email);
+            Models.SchoolData.addSchool(schoolname, address, phonenumber, schoolemail);
             return View();
         }
 
 
-        public ActionResult UpdateSchool()
+        public ActionResult UpdateSchool(string SchoolName, string SchoolAddress, string SchoolEmail, string SchoolPhone)
         {
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+
+            Models.SchoolData.modifySchool(1, SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
 
 
 
-
-            return View("ViewSchools");
+            return RedirectToAction("ViewSchools");
         }
 
+        public ActionResult DeleteSchool(string DeleteBtn)
+        {
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+
+
+            Models.SchoolData.deleteSchool(int.Parse(DeleteBtn));
+
+
+            return RedirectToAction("ViewSchools");
+        }
     }
 }
