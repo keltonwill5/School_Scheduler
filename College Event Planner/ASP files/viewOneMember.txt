@@ -4,7 +4,7 @@
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT members.*, school.name as schoolName, user_type.type FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email       ";
+                string query = "SELECT members.*, school.name as schoolName, user_type.type FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                    
