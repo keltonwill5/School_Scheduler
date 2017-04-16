@@ -1,6 +1,5 @@
         public static List<MembersViewModel> viewOneMember(string emailVar)
         {
-            List<MembersViewModel> members = new List<MembersViewModel>();
             MembersViewModel member = new MembersViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
@@ -10,11 +9,18 @@
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    member.email = reader.GetString(reader.GetOrdinal("email"));
-                    members.Add(member);
++                    member.id = reader.GetInt32(reader.GetOrdinal("members.Id"));
++                    member.firstName = reader.GetString(reader.GetOrdinal("members.firstName"));
++                    member.lastName = reader.GetString(reader.GetOrdinal("members.lastName"));
++                    member.picture = reader.GetString(reader.GetOrdinal("members.picture"));
++                    member.createDate = reader.GetDateTime(reader.GetOrdinal("members.createDate"));
++                    member.email = reader.GetString(reader.GetOrdinal("members.email"));
++                    member.password = reader.GetString(reader.GetOrdinal("members.password"));
++                    member.schoolName = reader.GetString(reader.GetOrdinal("school.name"));
++                    member.userType = reader.GetString(reader.GetOrdinal("user_type.type"));
                 }
             }
 
             dbCon.Close();
-            return members;
+            return member;
         }
