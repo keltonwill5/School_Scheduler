@@ -7,16 +7,16 @@
                 string query = "SELECT * FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
-+                   
+                   
                 member.id = reader.GetInt32(reader.GetOrdinal("members.Id"));
-+               member.firstName = reader.GetString(reader.GetOrdinal("members.firstName"));
-+               member.lastName = reader.GetString(reader.GetOrdinal("members.lastName"));
-+               member.picture = reader.GetString(reader.GetOrdinal("members.picture"));
-+               member.createDate = reader.GetDateTime(reader.GetOrdinal("members.createDate"));
-+               member.email = reader.GetString(reader.GetOrdinal("members.email"));
-+               member.password = reader.GetString(reader.GetOrdinal("members.password"));
-+               member.schoolName = reader.GetString(reader.GetOrdinal("school.name"));
-+               member.userType = reader.GetString(reader.GetOrdinal("user_type.type"));
+                member.firstName = reader.GetString(reader.GetOrdinal("members.firstName"));
+                member.lastName = reader.GetString(reader.GetOrdinal("members.lastName"));
+                member.picture = reader.GetString(reader.GetOrdinal("members.picture"));
+                member.createDate = reader.GetDateTime(reader.GetOrdinal("members.createDate"));
+                member.email = reader.GetString(reader.GetOrdinal("members.email"));
+                member.password = reader.GetString(reader.GetOrdinal("members.password"));
+                member.schoolName = reader.GetString(reader.GetOrdinal("school.name"));
+                member.userType = reader.GetString(reader.GetOrdinal("user_type.type"));
                 
             }
 
