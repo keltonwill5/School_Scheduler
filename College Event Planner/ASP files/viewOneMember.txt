@@ -1,0 +1,20 @@
+        public static List<MembersViewModel> viewOneMember(string emailVar)
+        {
+            List<MembersViewModel> members = new List<MembersViewModel>();
+            MembersViewModel member = new MembersViewModel();
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    member.email = reader.GetString(reader.GetOrdinal("email"));
+                    members.Add(member);
+                }
+            }
+
+            dbCon.Close();
+            return members;
+        }
