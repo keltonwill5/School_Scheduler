@@ -1,14 +1,14 @@
-        public static MembersViewModel getMember(string emailVar)
+       public static MembersViewModel getMember(string emailVar)
         {
             MembersViewModel member = new MembersViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT members.*, school.name as schoolName, user_type.type as type FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
-                
+                string query = "SELECT members.*, school.id as schoolName, user_type.id as type FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
+
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 cmd.Parameters.AddWithValue("@email", emailVar);
-                
+
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -23,7 +23,7 @@
                     member.userTypeId = reader.GetInt32(reader.GetOrdinal("type"));
                 }
             }
-
-            dbCon.Close();
-            return member;
+                dbCon.Close();
+                return member;
+            
         }
