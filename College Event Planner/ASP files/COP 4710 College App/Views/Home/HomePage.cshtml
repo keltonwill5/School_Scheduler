@@ -51,7 +51,7 @@
                     <ul class="nav navbar-nav">
 
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
+                      <!--  <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
                                 <span class="label label-warning">10</span>
@@ -60,7 +60,7 @@
                                 <li class="header">You have 10 notifications</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">                                        
+                                    <!--<ul class="menu">                                        
                                         <li>
                                             <a href="#">
                                                 <i class="fa fa-users text-aqua"></i> 5 new members joined today
@@ -81,7 +81,7 @@
                                 </li>
                                 <li class="footer"><a href="#">View all</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                         <!-- Tasks: style can be found in dropdown.less -->
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -106,7 +106,9 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="~/Home/LoginPage" class="btn btn-default btn-flat">Sign out</a>
+                                        @using (Html.BeginForm("logOut", "Home")) { 
+                                            <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                        }
                                     </div>
                                 </li>
                             </ul>
@@ -237,7 +239,7 @@
                 <!-- Info boxes -->
 
                 <div class="row">
-                    @if ((int)Session["privilegeID"] > 1)
+                    @if ((int)Session["privilegeID"] > 10)
                     {
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="info-box">
@@ -311,7 +313,7 @@
                                 <!-- USERS LIST -->
                                 <div class="box box-danger">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Latest Members</h3>
+                                        <h3 class="box-title">Members</h3>
 
                                         <div class="box-tools pull-right">
                                             <!--<span class="label label-danger">8 New Members</span>-->
@@ -333,7 +335,7 @@
                                                     if (i >= 8) { break; }
                                                     <li>
                                                         <img src="../../Images/stickman.jpg" alt="User Image">
-                                                        <a class="users-list-name" href="#">@item.firstname</a>
+                                                        <a class="users-list-name" href="#">@item.firstName</a>
                                                         <span class="users-list-date">@Session["privilege"]</span>
                                                     </li>
                                                  }
@@ -355,7 +357,7 @@
                         <!-- TABLE: LATEST ORDERS -->
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Latest Events</h3>
+                                <h3 class="box-title">Events</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -372,35 +374,20 @@
                                             <tr>
                                                 <th>Event ID</th>
                                                 <th>Description</th>
-                                                <th>Status</th>
+                                                <th>Date</th>
                                                 <th>Type</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach (var item in ViewBag.events)
+                                            {
                                             <tr>
-                                                <td><a href="#">OR9842</a></td>
-                                                <td>Students get together to play sports </td>
-                                                <td><span class="label label-success">Completed</span></td>
-                                                <td>NON-RSO Event</td>
+                                                <td><a href="#">@item.name</a></td>
+                                                <td>@item.description</td>
+                                                <td>@item.date</td>
+                                                <td>@item.categoryId</td>
                                             </tr>
-
-                                            <tr>
-                                                <td><a href="#">OR7429</a></td>
-                                                <td>Drinking Competition</td>
-                                                <td><span class="label label-warning">In Progress</span></td>
-                                                <td>KAPPA-SIGMA Sponsored</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><a href="#">OR9846</a></td>
-                                                <td>Museum Visit</td>
-                                                <td><span class="label label-danger">Cancelled</span></td>
-                                                <td> UCF Sponsored </td>
-                                            </tr>
-                                        <td><a href="#">OR9850</a></td>
-                                        <td>Party at Noel's House</td>
-                                        <td><span class="label label-warning">In Progress</span></td>
-                                        <td> Sigma PI Sponsored </td>
+                                            }
                                         <tr></tr>
                                         </tbody>
                                     </table>
@@ -435,19 +422,19 @@
                             <div class="box-body">
                                 <ul class="products-list product-list-in-box">
 
-                                    @{  int i = 0;
+                                    @{  i = 0;
                                         foreach (var item in ViewBag.schools)
                                         {
                                             if (i >= 3) { break; }
                                                 <li class="item">
                                                 <div class="product-img">
-                                                    <img src="../../Images/ucf_logo.jpeg" alt="Product Image">
+                                                    <img src="../../Images/stickman.jpg" alt="Product Image">
                                                 </div>
                                                 <div class="product-info">
                                                     <a href="javascript:void(0)" class="product-title">
-                                                        University of Central Florida
+                                                        @item.name
                                                         <span class="product-description">
-                                                            4000 Central Florida Blvd, Orlando, FL 32816
+                                                            @item.address
                                                         </span>
                                                 </div>
                                             </li>

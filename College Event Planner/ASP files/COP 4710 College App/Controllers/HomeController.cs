@@ -15,6 +15,28 @@ namespace COP_4710_College_App.Controllers
         [HttpGet]
         public ActionResult LoginPage()
         {
+
+            /*
+            Session["loggedIn"] = true;
+
+            Session["name"] = "David Clapp";
+            Session["schoolID"] = 1;
+            Session["privilege"] = "Supreme Overlord";
+            Session["privilegeID"] = 9001;
+            Session["createdDate"] = "00/00/00";
+            return RedirectToAction("HomePage");
+
+
+            */
+
+
+
+
+
+
+
+
+
             if (Models.SessionHandler.loggedIn())
                 return RedirectToAction("HomePage");
             else
@@ -54,17 +76,30 @@ namespace COP_4710_College_App.Controllers
             Session["numSchools"] = ViewBag.schools.Count;
 
             ViewBag.users = Models.MembersData.viewMembers();
+            Session["numMembers"] = ViewBag.users.Count;
 
-            
-            //get number of events
-            //get number of modified events?
-            //get number of members
-            //get most recent 8 members
+            ViewBag.events = Models.EventsData.viewEvents();
+            Session["numEvents"] = ViewBag.events.Count;
 
-
+            ViewBag.rso = Models.RsoData.viewRSO();
+            Session["numOrg"] = ViewBag.rso.Count;
 
             return View();
         }
+
+
+        public ActionResult logOut()
+        {
+            Session["loggedIn"] = false;
+
+            Session["name"] = null;
+            Session["schoolID"] = null;
+            Session["privilege"] = null;
+            Session["privilegeID"] = null;
+            Session["createdDate"] = null;
+            return RedirectToAction("LoginPage");
+        }
+
 
         [HttpGet]
         public ActionResult SignupPage()
@@ -81,7 +116,7 @@ namespace COP_4710_College_App.Controllers
                 return View();
             else
             {
-                Models.MembersData.addMember(firstname, lastname, "../Images/stickman.jpg", email, password,"1","0");
+                Models.MembersData.addMember(firstname, lastname, "../Images/stickman.jpg", email, password,schoolOP,"0");
 
                 Models.MembersViewModel cur_user = Models.MembersData.getMember(email);
                 Session["loggedIn"] = true;

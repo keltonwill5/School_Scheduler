@@ -239,7 +239,8 @@
                                             <th>School</th>
                                             <th>Email</th>
                                             <th>Creation Date</th>
-                                            <th>Options</th>
+                                            @if ((int)Session["privilegeID"] >= 2)
+                                            {<th>Options</th>}
                                         </tr>
                                     </thead>
 
@@ -252,9 +253,9 @@
                                                 <td>@ViewBag.schoolNames[item.schoolNameId]</td>
                                                 <td>@item.email</td>
                                                 <td>@item.createDate.ToString("MM/dd/yyyy")</td>
-                                                @if((int)Session["privilegeID"] >= 2) { }
+                                                @if((int)Session["privilegeID"] >= 2) { 
                                                     <td>
-                                                        @using (Html.BeginForm("DeleteUser", "Users")) { }
+                                                        @using (Html.BeginForm("DeleteUser", "Users")) { 
                                                             <button value="@item.id" id="DeleteUserBtn" name="DeleteUserBtn" type="danger" class="btn btn-danger">Delete</button>
                                                         }
                                                     </td>

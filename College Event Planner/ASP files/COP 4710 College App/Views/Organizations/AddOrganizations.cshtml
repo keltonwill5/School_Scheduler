@@ -262,10 +262,10 @@
                                     <div class="form-group">
                                         <label>School</label>
                                         <select id="SchoolName" name="SchoolName" class="form-control">
-                                            <option>UCF</option>
-                                            <option>FSU</option>
-                                            <option>UM</option>
-                                            <option>FIU</option>
+                                                @foreach (var item in ViewBag.schools)
+                                                {
+                                                    <option value=@item.id>@item.name</option>
+                                                }
                                         </select>
                                     </div>
 
@@ -277,11 +277,11 @@
                                     <div class="form-group">
                                         <label>Type</label>
                                         <select id="GroupType" name="GroupType" class="form-control">
-                                            <option value="Fraternity">Fraternity</option>
-                                            <option value="Religious">Religious</option>
-                                            <option value="Political">Political</option>
-                                            <option value="Academic">Academic</option>
-                                            <option value="Recreational">Recreational</option>
+                                            <option value="0">Fraternity</option>
+                                            <option value="1">Religious</option>
+                                            <option value="2">Political</option>
+                                            <option value="3">Academic</option>
+                                            <option value="4">Recreational</option>
                                         </select>
                                     </div>
 

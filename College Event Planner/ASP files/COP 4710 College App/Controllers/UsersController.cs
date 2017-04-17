@@ -16,8 +16,7 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("LoginPage","Home");
             }
-            //ViewBag.users = something when i get code
-            //get school names
+            
             ViewBag.users = Models.MembersData.viewMembers();
             Session["numMembers"] = ViewBag.users.Count;
             ViewBag.schools = Models.SchoolData.viewSchools();

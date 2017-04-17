@@ -339,40 +339,41 @@
                                             <th>Type</th>
                                             <th>Point of Contact</th>
                                             <th>Contact Number</th>
-                                            <th>Total Members</th>
+                                            <th>Contact Email</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-                                        <tr>
-                                            <td>SigmaPI</td>
-                                            <td>UCF</td>
-                                            <td>Fraternity</td>
-                                            <td>@Session["name"]</td>
-                                            <td>(786) 580-7465</td>
-                                            <td>10</td>
-                                            <td>
-                                                <button type="danger" class="btn btn-danger">Delete</button>
-                                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
-                                                <button type="button" class="btn btn-success">Join</button>
-                                            </td>
-                                        </tr>
 
-                                        <tr>
-                                            <td>UCF Christians</td>
-                                            <td>FIU</td>
-                                            <td>Religious</td>
-                                            <td>Michael Vigil</td>
-                                            <td>(407) 222-2222</td>
-                                            <td>15</td>
-                                            <td>
-                                                <button type="danger" class="btn btn-danger">Delete</button>
-                                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
-                                                <button type="button" class="btn btn-success">Join</button>
-                                            </td>
-                                        </tr>
+                                        @foreach (var item in ViewBag.rso)
+                                        {
+                                            <tr>
+                                                <td>@item.name</td>
+                                                <td>@item.schoolNameId</td>
+                                                <td>@item.typeId</td>
+                                                <td>@Session["name"]</td>
+                                                <td>@item.contactPhone</td>
+                                                <td>@item.contactEmail</td>
+                                                <td>
+                                                    @if ((int)Session["privilegeID"] >= 2)
+                                                    {
+                                                        using (Html.BeginForm("DeleteRSO", "Orginizations"))
+                                                        {
+                                                            <button id="deleteRSO" name="deleteRSO" value="@item.id" type="submit" class="btn btn-danger">Delete</button>
+                                                        }
+                                                    }
+                                                       
+                                                    @if ((int)Session["privilegeID"] >= 1)
+                                                    {
+                                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
+                                                    }
+                                                    <button type="button" href="#" class="btn btn-success">Join</button>
+                                                </td>
+                                            </tr>
+                                        }
+
 
                                     </tbody>
                                 </table>

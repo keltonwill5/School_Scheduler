@@ -71,7 +71,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("HomePage", "Home");
             }
 
-            Models.SchoolData.modifySchool((int)Session["MODIFYID"], SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
+            Models.SchoolData.modifySchool((int)Session["schoolModifyVal"], SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
 
 
 
@@ -95,5 +95,11 @@ namespace COP_4710_College_App.Controllers
             return RedirectToAction("ViewSchools");
         }
 
+
+        public void setModifyVal(string ModifyBtn)
+        {
+            Session["schoolModifyVal"] = ModifyBtn;
+            
+        }
     }
 }

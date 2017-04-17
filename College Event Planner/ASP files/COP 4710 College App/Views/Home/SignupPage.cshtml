@@ -62,10 +62,10 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">School</label>
                                 <br />
-                                <select class="col-md-8">
+                                <select id="schoolOP" name="schoolOP" class="col-md-8">
                                    @foreach (var item in ViewBag.schools)
                                    {
-                                    <option id="schoolOP" name="schoolOP" value=@item.name>@item.name</option>
+                                    <option value=@item.id>@item.name</option>
                                    }
                                 </select>
                             </div>
