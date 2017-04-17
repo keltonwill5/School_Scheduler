@@ -25,6 +25,19 @@ namespace COP_4710_College_App.Models
           
         }
 
+        public static bool userAllowed(int page)
+        {
+            if (HttpContext.Current.Session["privilegeID"] == null)
+                return false;
+            else if ((int)HttpContext.Current.Session["privilegeID"] >= page)
+                return true;
+
+
+            return false;
+
+
+        }
+
 
     }
 }

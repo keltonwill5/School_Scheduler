@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace COP_4710_College_App.Controllers
 {
-   
+
 
 
 
@@ -33,6 +33,10 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("LoginPage", "Home");
             }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
 
 
 
@@ -46,6 +50,11 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("LoginPage", "Home");
             }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
             Models.SchoolData.addSchool(schoolname, address, phonenumber, schoolemail);
             return View();
         }
@@ -56,6 +65,10 @@ namespace COP_4710_College_App.Controllers
             if (Models.SessionHandler.loggedIn() == false)
             {
                 return RedirectToAction("LoginPage", "Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
             }
 
             Models.SchoolData.modifySchool((int)Session["MODIFYID"], SchoolName, SchoolAddress, SchoolPhone, SchoolEmail);
@@ -71,18 +84,16 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("LoginPage", "Home");
             }
-
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
 
             Models.SchoolData.deleteSchool(int.Parse(DeleteBtn));
 
 
             return RedirectToAction("ViewSchools");
         }
-/*
-        public Action setModifyID(string ModifyBtn)
-        {
-            Session["MODIFYID"] = int.Parse(ModifyBtn);
-        }
-        */
+
     }
 }

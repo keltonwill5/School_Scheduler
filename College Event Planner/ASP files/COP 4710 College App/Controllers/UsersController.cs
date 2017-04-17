@@ -35,6 +35,18 @@ namespace COP_4710_College_App.Controllers
 
         public ActionResult DeleteUser(string DeleteUserBtn)
         {
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
+
+
+
             Models.MembersData.deleteMember(int.Parse(DeleteUserBtn));
 
             return RedirectToAction("ViewUsers");

@@ -20,10 +20,17 @@ namespace COP_4710_College_App.Controllers
 
         public ActionResult AddEvents()
         {
+
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
+            if (Models.SessionHandler.userAllowed(1) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
+           
             return View();
         }
 
@@ -32,6 +39,10 @@ namespace COP_4710_College_App.Controllers
             if (Models.SessionHandler.loggedIn() == false)
             {
                 return RedirectToAction("LoginPage","Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
             }
             return View();
         }

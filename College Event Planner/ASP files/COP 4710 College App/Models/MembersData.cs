@@ -146,29 +146,30 @@ namespace COP_4710_College_App.Models
         public static MembersViewModel getMember(string emailVar)
         {
             MembersViewModel member = new MembersViewModel();
-         
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
+                string query = "SELECT members.*, school.name as schoolName, user_type.type FROM members JOIN school ON members.schoolNameId = school.id JOIN user_type ON members.userTypeId = user_type.id WHERE members.email = @email";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
-               
-                    member.id = reader.GetInt32(reader.GetOrdinal("Id"));
-                    member.firstName = reader.GetString(reader.GetOrdinal("firstName"));
-                    member.lastName = reader.GetString(reader.GetOrdinal("lastName"));
-                    member.picture = reader.GetString(reader.GetOrdinal("picture"));
-                    member.createDate = reader.GetDateTime(reader.GetOrdinal("createDate"));
-                    member.email = reader.GetString(reader.GetOrdinal("email"));
-                    member.password = reader.GetString(reader.GetOrdinal("password"));
-                    member.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
-                    member.userTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"));
-                    
+                while (reader.Read())
+                {
+                    member.id = reader.GetInt32(reader.GetOrdinal("members.Id"));
+                    member.firstName = reader.GetString(reader.GetOrdinal("members.firstName"));
+                    member.lastName = reader.GetString(reader.GetOrdinal("members.lastName"));
+                    member.picture = reader.GetString(reader.GetOrdinal("members.picture"));
+                    member.createDate = reader.GetDateTime(reader.GetOrdinal("members.createDate"));
+                    member.email = reader.GetString(reader.GetOrdinal("members.email"));
+                    member.password = reader.GetString(reader.GetOrdinal("members.password"));
+                    member.schoolNameId = reader.GetInt32(reader.GetOrdinal("school.name"));
+                    member.userTypeId = reader.GetInt32(reader.GetOrdinal("user_type.type"));
+                }
             }
 
             dbCon.Close();
             return member;
         }
+
 
         public static string getTitle(int ID)
         {

@@ -36,7 +36,7 @@ namespace COP_4710_College_App.Controllers
                 Session["schoolID"] = cur_user.schoolNameId;
                 Session["privilege"] = Models.MembersData.getTitle(cur_user.userTypeId);
                 Session["privilegeID"] = cur_user.userTypeId;
-                Session["createdDate"]
+                Session["createdDate"] = cur_user.createDate.ToString("MM/dd/yyyy");
                 return RedirectToAction("HomePage");
             }
             return View();
@@ -52,6 +52,9 @@ namespace COP_4710_College_App.Controllers
 
             ViewBag.schools = Models.SchoolData.viewSchools();
             Session["numSchools"] = ViewBag.schools.Count;
+
+            ViewBag.users = Models.MembersData.viewMembers();
+
             
             //get number of events
             //get number of modified events?
@@ -72,13 +75,13 @@ namespace COP_4710_College_App.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignupPage(string email, string firstname, string lastname, string password, string school)
+        public ActionResult SignupPage(string email, string firstname, string lastname, string password, string schoolOP)
         {
             if (Models.MembersData.checkExist(email))
                 return View();
             else
             {
-                Models.MembersData.addMember(firstname, lastname, "../Images/stickman.jpg", email, password,school,"Student");
+                Models.MembersData.addMember(firstname, lastname, "../Images/stickman.jpg", email, password,"1","0");
 
                 Models.MembersViewModel cur_user = Models.MembersData.getMember(email);
                 Session["loggedIn"] = true;
