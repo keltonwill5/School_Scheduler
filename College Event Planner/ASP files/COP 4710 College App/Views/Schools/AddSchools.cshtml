@@ -47,7 +47,7 @@
             <!-- Logo -->
             <a href="../Home/HomePage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png"/></span>
+                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png" /></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg">@Session["privilege"]</span>
             </a>
@@ -63,48 +63,48 @@
                     <ul class="nav navbar-nav">
 
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"> Testing </i>
-                                            </a>
-                                        </li>
+                        <!--  <li class="dropdown notifications-menu">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-bell-o"></i>
+                              <span class="label label-warning">10</span>
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li class="header">You have 10 notifications</li>
+                              <li>
+                                  <!-- inner menu: contains the actual data -->
+                        <!--<ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-red"> Testing </i>
+                                        </a>
+                                    </li>
 
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </li>-->
                         <!-- Tasks: style can be found in dropdown.less -->
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/Images/stickman.jpg" class="user-image" alt="User Image">
+                                <img src="../../Images/stickman.jpg" class="user-image" alt="User Image">
                                 <span class="hidden-xs">@Session["name"]</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
+                                    <img src="../../Images/stickman.jpg" class="img-circle" alt="User Image">
 
                                     <p>
                                         @Session["name"] - @Session["privilege"]
@@ -118,7 +118,10 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="~/Home/LoginPage" class="btn btn-default btn-flat">Sign out</a>
+                                        @using (Html.BeginForm("logOut", "Home"))
+                                        {
+                                            <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                        }
                                     </div>
                                 </li>
                             </ul>
@@ -132,10 +135,6 @@
 
             </nav>
         </header>
-
-
-
-
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -143,7 +142,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
+                        <img src="../../Images/stickman.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>@Session["name"]</p>
@@ -165,25 +164,27 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">NAVIGATION Options</li>
-                    <li>
-                        <a href="~/Home/HomePage">
+                    <li class="active">
+                        <a href="../Home/HomePage">
                             <i class="fa fa-dashboard"></i> <span>Summary</span>
                         </a>
                     </li>
 
-                    <li class="active">
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-university"></i> <span>Schools</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">@Session["numSchools"]</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li class="active"><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
-                            </ul>
-                        </a>
-                    </li>
-
+                    @if ((int)Session["privilegeID"] > 1)
+                    {
+                        <li>
+                            <a href="pages/calendar.html">
+                                <i class="fa fa-university"></i> <span>Schools</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numSchools"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
+                                    <li><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
+                                </ul>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a href="pages/calendar.html">
                             <i class="fa fa-calendar"></i> <span>Events</span>
@@ -191,10 +192,14 @@
                                 <small class="label pull-right bg-green">@Session["numEvents"]</small>
                             </span>
                             <ul class="treeview-menu">
-                                <li><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li class="active"><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                <li class="active"><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
+                                @if ((int)Session["privilegeID"] >= 1)
+                                {
+                                    <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
+                                    <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                }
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
+                                <li class="active"><a href="~/Events/ReviewEvents"><i class="fa fa-circle-o"></i> Review</a></li>
                             </ul>
                         </a>
                     </li>
@@ -206,7 +211,7 @@
                                 <small class="label pull-right bg-green">@Session["numMembers"]</small>
                             </span>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="~/Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
+                                <li><a href="../Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
                             </ul>
                         </a>
                     </li>
@@ -218,11 +223,15 @@
                                 <small class="label pull-right bg-green">@Session["numOrg"]</small>
                             </span>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Organizations/AddOrganizations"><i class="fa fa-circle-o"></i>Add</a></li>
+                                <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
+                                @if ((int)Session["privilegeID"] > 0)
+                                {
+                                    <li><a href="~/Organization/AddOrganizations"><i id="AdminAddOrg" name="AdminAddOrg" class="fa fa-circle-o"></i>Add</a></li>
+                                }
                             </ul>
                         </a>
                     </li>
+
 
                 </ul>
             </section>
