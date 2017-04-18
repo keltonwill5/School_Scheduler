@@ -94,12 +94,6 @@ namespace COP_4710_College_App.Controllers
 
             return RedirectToAction("ViewSchools");
         }
-
-
-        public void setModifyVal(string ModifyBtn)
-        {
-            Session["schoolModifyVal"] = ModifyBtn;
-            
-        }
+        
     }
 }
