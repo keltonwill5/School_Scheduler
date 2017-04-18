@@ -200,7 +200,6 @@
                                 @if ((int)Session["privilegeID"] >= 1)
                                 {
                                     <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                    <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
                                 }
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
                                 <li class="active"><a href="~/Events/ReviewEvents"><i class="fa fa-circle-o"></i> Review</a></li>
@@ -293,7 +292,7 @@
                                             <label>Time:</label>
 
                                             <div class="input-group">
-                                                <input id="time" name=time" type="time" class="form-control timepicker">
+                                                <input type="text" class="form-control timepicker">
 
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
@@ -302,16 +301,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Date:</label>
+                                    
 
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
+                                        <div class="form-group">
+                                            <label>Date:</label>
+
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="datepicker">
                                             </div>
-                                            <input type="date" class="form-control pull-right" id="datepicker" name="datepicker">
                                         </div>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <label>Contact Phone:</label>
@@ -320,8 +322,13 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                             </div>
-                                            <input id="number" name="number" type="number" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
+                                            <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="">
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                                     </div>
 
                                     <div class="form-horizontal" style="width: 550px">
@@ -377,11 +384,7 @@
                                     </div>
 
                                     <br>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                                    </div>
-
+                      
                                     <!-- /.input group -->
                                 </div>
                                 <!-- /.input group -->
