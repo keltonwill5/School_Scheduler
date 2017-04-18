@@ -98,7 +98,7 @@ namespace COP_4710_College_App.Models
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM events JOIN school ON events.schoolNameId = school.id JOIN user_type ON events.privacyId = user_type.id JOIN event_category ON events.categoryId = event_category.Id JOIN rso ON events.rsoNameId = rso.Id";
+                string query = "SELECT events.*, school.name as schoolName, event_category.category as category, rso.name as rsoName FROM events JOIN school ON events.schoolNameId = school.id JOIN event_category ON events.categoryId = event_category.Id JOIN rso ON events.rsoNameId = rso.Id";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -118,6 +118,9 @@ namespace COP_4710_College_App.Models
                     evnt.rsoNameId = reader.GetInt32(reader.GetOrdinal("rsoNameId"));
                     evnt.comments = reader.GetString(reader.GetOrdinal("comments"));
                     evnt.rating = reader.GetString(reader.GetOrdinal("rating"));
+                    evnt.schoolName = reader.GetString(reader.GetOrdinal("schoolName"));
+                    evnt.category = reader.GetString(reader.GetOrdinal("category"));
+                    evnt.rsoName = reader.GetString(reader.GetOrdinal("rsoName"));
                     events.Add(evnt);
                 }
             }

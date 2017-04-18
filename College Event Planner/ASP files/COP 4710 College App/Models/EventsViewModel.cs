@@ -22,6 +22,9 @@ namespace COP_4710_College_App.Models
         public int rsoNameId { get; set; }
         public string comments { get; set; }
         public string rating { get; set; }
+        public string rsoName { get; set; }
+        public string category { get; set; }
+        public string schoolName { get; set; }
 
     }
 }
