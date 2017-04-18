@@ -37,7 +37,7 @@
             <!-- Logo -->
             <a href="../Home/HomePage" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png"/></span>
+                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png" /></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg">@Session["privilege"]</span>
             </a>
@@ -285,31 +285,31 @@
                                             <input type="text" class="form-control" placeholder="Member 2">
                                             <input type="text" class="form-control" placeholder="Member 3">
                                             <input type="text" class="form-control" placeholder="Member 4">
-                                            <input type="text" class="form-control" placeholder="Member 5"> 
+                                            <input type="text" class="form-control" placeholder="Member 5">
                                             <input type="text" class="form-control" placeholder="Member 6">
                                             <input type="text" class="form-control" placeholder="Member 7">
                                             <input type="text" class="form-control" placeholder="Member 8">
                                             <input type="text" class="form-control" placeholder="Member 9">
-                                            <input type="text" class="form-control" placeholder="Member 10"> 
+                                            <input type="text" class="form-control" placeholder="Member 10">
                                         </div>
                                     </div>
 
                                 </div>
-                              </form>
+                            </form>
 
-                                <div class="panel-footer" style="margin-bottom:-14px;">
-                                    <input type="submit" class="btn btn-success" value="Update" />
-                                    <!--<span class="glyphicon glyphicon-ok"></span>-->
-                                    <input type="reset" class="btn btn-danger" value="Clear" />
-                                    <!--<span class="glyphicon glyphicon-remove"></span>-->
-                                    <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
-                                </div>
+                            <div class="panel-footer" style="margin-bottom:-14px;">
+                                <input type="submit" class="btn btn-success" value="Update" />
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                                <input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
-     
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -339,41 +339,36 @@
                                             <th>Type</th>
                                             <th>Point of Contact</th>
                                             <th>Contact Number</th>
-                                            <th>Contact Email</th>
+                                            <th>Total Members</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-
-                                        @foreach (var item in ViewBag.rso)
+                                        @foreach (var item in ViewBag.rsos)
                                         {
                                             <tr>
                                                 <td>@item.name</td>
-                                                <td>@item.schoolNameId</td>
-                                                <td>@item.typeId</td>
-                                                <td>@Session["name"]</td>
-                                                <td>@item.contactPhone</td>
+                                                <td>@item.schoolName</td>
+                                                <td>@item.type</td>
                                                 <td>@item.contactEmail</td>
+                                                <td>@item.contactPhone</td>
+                                                <td>@item.count</td>
                                                 <td>
-                                                    @if ((int)Session["privilegeID"] >= 2)
+                                                    @using (Html.BeginForm("DeleteRSO", "Organizations"))
                                                     {
-                                                        using (Html.BeginForm("DeleteRSO", "Orginizations"))
-                                                        {
-                                                            <button id="deleteRSO" name="deleteRSO" value="@item.id" type="submit" class="btn btn-danger">Delete</button>
-                                                        }
+                                                        <button id="DeleteBtn" value="@item.id" name="DeleteBtn" type="submit" class="btn btn-danger">Delete</button>
                                                     }
-                                                       
-                                                    @if ((int)Session["privilegeID"] >= 1)
+                                                    <button id="ModifyBtn" value="@item.id" name="ModifyBtn" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button>
+
+                                                    @using (Html.BeginForm("JoinRSO", "Organizations"))
                                                     {
-                                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#contact">Update</button>
+                                                        <button id="JoinBtn" value="@item.id" name="JoinBtn" type="submit" class="btn btn-danger">Join</button>
                                                     }
-                                                    <button type="button" href="#" class="btn btn-success">Join</button>
                                                 </td>
                                             </tr>
                                         }
-
 
                                     </tbody>
                                 </table>
@@ -476,8 +471,74 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
 
-    <!-- Modal -->
-    <script src="~/dist/js/modal.js"></script>
+    <!-- Modal Items-->
+    <div class="container">
+        <div class="row">
+            <div class="modal fade" id="Update" tabindex="-1" role="dialog" aria-labelledby="UpdateLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="panel-title" id="UpdateLabel"><span class="glyphicon glyphicon-info-sign"></span> Update School</h4>
+                        </div>
+
+
+                        <!--<form action="#" method="post" accept-charset="utf-8">-->
+                        @using (Html.BeginForm("UpdateRSO", "Organizations"))
+                        {
+                            <div class="modal-body" style="padding: 5px;">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="Name" id="Name" placeholder="Name" type="text" required autofocus />
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="SchoolName" id="SchoolName" placeholder="School Name" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="Type" id="Type" placeholder="Type" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="ContactName" id="ContactName" placeholder="Contact Name" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="ContactPhone" id="ContactPhone" placeholder="Contact Phone" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                        <input class="form-control" name="ContactEmail" id="ContactEmail" placeholder="Contact Email" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                        <input type="text" placeholder="Description" class="form-control" name="Description" id="Description" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="margin-bottom:-14px;">
+
+                                <input type="submit" class="btn btn-success" value="Update" id="UpdateRSO" name="UpdateRSO" />
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                                <input type="reset" class="btn btn-danger" value="Clear" id="Clear" name="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                            </div>
+                        }
+                        <!--</form>-->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- page script -->
     <script>
   $(function () {

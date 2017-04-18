@@ -8,18 +8,34 @@ namespace COP_4710_College_App.Controllers
 {
     public class OrganizationsController : Controller
     {
-        // GET: Home
+        [HttpGet]
         public ActionResult ViewOrganizations()
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
                 return RedirectToAction("LoginPage", "Home");
             }
-            ViewBag.rso = Models.RsoData.viewRSO();
-            Session["numOrg"] = ViewBag.rso.Count;
-
+            ViewBag.rsos = Models.RsoData.viewRSO();
             return View();
         }
+
+        public ActionResult DeleteRSO(string DeleteBtn)
+        {
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
+            Models.RsoData.deleteRSO(int.Parse(DeleteBtn));
+
+
+            return RedirectToAction("ViewOrganizations");
+        }
+
         [HttpGet]
         public ActionResult AddOrganizations()
         {
@@ -31,38 +47,64 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("HomePage", "Home");
             }
-
-            ViewBag.schools = Models.SchoolData.viewSchools();
-
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddOrganizations(string SchoolName, string GroupName, string GroupType, string Desc, string ContactName, string NumMem, string Mem1, string Mem2, string Mem3, string Mem4, string Mem5, string Mem6, string Mem7, string Mem8, string Mem9, string Mem10, string orgPhone, string orgEmail)
+        public ActionResult AddOrganizations(string Name, string SchoolName, string Type, string ContactName, string ContactPhone, string ContactEmail, string Desc)
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
                 return RedirectToAction("LoginPage", "Home");
             }
-            if (Models.SessionHandler.userAllowed(1) == false)
+            if (Models.SessionHandler.userAllowed(2) == false)
             {
                 return RedirectToAction("HomePage", "Home");
             }
 
-            Models.RsoData.addRSO(GroupName, SchoolName, GroupType, ContactName, orgPhone, orgEmail, Desc, int.Parse(NumMem));
-
-            return RedirectToAction("ViewOrganizations");
+            Models.RsoData.addRSO(Name, SchoolName, Type, ContactName, ContactPhone, ContactEmail, Desc, 4);
+            return View();
         }
 
-
-        public ActionResult DeleteRSO(string deleteRSO)
+        public ActionResult JoinRSO(string JoinBtn)
         {
 
-            Models.RsoData.deleteRSO(int.Parse(deleteRSO));
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
+            Models.RsoData.joinRSO(int.Parse(JoinBtn), 7);
+
+
             return RedirectToAction("ViewOrganizations");
 
+        }
+
+        public ActionResult UpdateRSO(string Name, string SchoolName, string Type, string ContactName, string ContactPhone, string ContactEmail, string Description)
+        {
+            if (Models.SessionHandler.loggedIn() == false)
+            {
+                return RedirectToAction("LoginPage", "Home");
+            }
+            if (Models.SessionHandler.userAllowed(2) == false)
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+
+            Models.RsoData.modifyRSO(6, Name, SchoolName, Type, ContactName, ContactPhone, ContactEmail, Description, 4);
 
 
+
+            return RedirectToAction("ViewOrganizations");
         }
     }
 }

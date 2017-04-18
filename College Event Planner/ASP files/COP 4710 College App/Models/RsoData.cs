@@ -11,7 +11,7 @@ namespace COP_4710_College_App.Models
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO rso VALUES (null, @name, (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM rso_type WHERE rso_type.type=@typeId), @contactName, @contactPhone, @contactEmail, @description, (SELECT Id FROM members WHERE members.Id = @memberId))";
+                string query = "INSERT INTO rso VALUES (null, @name, (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM rso_type WHERE rso_type.type=@typeId), @contactName, @contactPhone, @contactEmail, @description, @memberId)";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
 
                 cmd.Parameters.AddWithValue("@name", nameVar);
@@ -33,7 +33,7 @@ namespace COP_4710_College_App.Models
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "UPDATE rso SET name=@name, schoolNameId=(SELECT Id FROM school WHERE school.name=@schoolNameId), typeId=(SELECT Id FROM rso_type WHERE rso_type.type=@typeId), contactName=@contactName, contactPhone=@phone, contactEmail=@email, description=@description, memberId=(SELECT Id FROM members WHERE members.Id = @memberId) WHERE id = @id";
+                string query = "UPDATE rso SET name=@name, schoolNameId=(SELECT Id FROM school WHERE school.name=@schoolNameId), typeId=(SELECT Id FROM rso_type WHERE rso_type.type=@typeId), contactName=@contactName, contactPhone=@contactPhone, contactEmail=@contactEmail, description=@description, memberId=@memberId WHERE id = @id";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
 
                 cmd.Parameters.AddWithValue("@Id", rsoID);
@@ -50,6 +50,23 @@ namespace COP_4710_College_App.Models
 
             dbCon.Close();
         }
+
+        public static void joinRSO(int rsoID, int userID)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "INSERT INTO rso_members VALUES (null, @rso_id, @user_id)";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@rso_id", rsoID);
+                cmd.Parameters.AddWithValue("@user_id", userID);
+                cmd.ExecuteNonQuery();
+            }
+
+            dbCon.Close();
+        }
+
 
 
         public static void deleteRSO(int rsoID)
@@ -73,9 +90,9 @@ namespace COP_4710_College_App.Models
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM rso JOIN school ON rso.schoolNameId = school.id JOIN rso_type ON rso.typeId = rso_type.id JOIN members ON rso.memberId = members.Id";
+                string query = "SELECT rso.*, school.name as schoolName, rso_type.type as type, (SELECT COUNT(Id) FROM rso_members WHERE rso_members.rso_id = rso.id) as count FROM rso JOIN school ON rso.schoolNameId = school.id JOIN rso_type ON rso.typeId = rso_type.id";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
-                var reader = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     RsoViewModel rso = new RsoViewModel();
@@ -88,6 +105,9 @@ namespace COP_4710_College_App.Models
                     rso.contactEmail = reader.GetString(reader.GetOrdinal("contactEmail"));
                     rso.description = reader.GetString(reader.GetOrdinal("description"));
                     rso.memberId = reader.GetInt32(reader.GetOrdinal("memberId"));
+                    rso.schoolName = reader.GetString(reader.GetOrdinal("schoolName"));
+                    rso.type = reader.GetString(reader.GetOrdinal("type"));
+                    rso.count = reader.GetInt32(reader.GetOrdinal("count"));
                     rsos.Add(rso);
                 }
             }
