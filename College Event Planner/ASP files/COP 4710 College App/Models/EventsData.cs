@@ -80,7 +80,6 @@ namespace COP_4710_College_App.Models
         public static List<EventsViewModel> viewEvents()
         {
             List<EventsViewModel> events = new List<EventsViewModel>();
-            EventsViewModel evnt = new EventsViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
@@ -89,6 +88,7 @@ namespace COP_4710_College_App.Models
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    EventsViewModel evnt = new EventsViewModel();
                     evnt.id = reader.GetInt32(reader.GetOrdinal("Id"));
                     evnt.name = reader.GetString(reader.GetOrdinal("name"));
                     evnt.createDate = reader.GetDateTime(reader.GetOrdinal("createDate"));
@@ -100,7 +100,7 @@ namespace COP_4710_College_App.Models
                     evnt.contactEmail = reader.GetString(reader.GetOrdinal("contactEmail"));
                     evnt.privacyId = reader.GetInt32(reader.GetOrdinal("privacyId"));
                     evnt.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));
-                    evnt.rsoNameId = reader.GetInt32(reader.GetOrdinal("rosNameId"));
+                    evnt.rsoNameId = reader.GetInt32(reader.GetOrdinal("rsoNameId"));
                     evnt.comments = reader.GetString(reader.GetOrdinal("comments"));
                     evnt.rating = reader.GetString(reader.GetOrdinal("rating"));
                     events.Add(evnt);

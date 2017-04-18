@@ -70,7 +70,6 @@ namespace COP_4710_College_App.Models
         public static List<RsoViewModel> viewRSO()
         {
             List<RsoViewModel> rsos = new List<RsoViewModel>();
-            RsoViewModel rso = new RsoViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
@@ -79,6 +78,7 @@ namespace COP_4710_College_App.Models
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    RsoViewModel rso = new RsoViewModel();
                     rso.id = reader.GetInt32(reader.GetOrdinal("Id"));
                     rso.name = reader.GetString(reader.GetOrdinal("name"));
                     rso.schoolNameId = reader.GetInt32(reader.GetOrdinal("schoolNameId"));

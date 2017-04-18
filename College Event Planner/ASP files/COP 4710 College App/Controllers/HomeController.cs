@@ -57,7 +57,7 @@ namespace COP_4710_College_App.Controllers
                 Session["name"] = cur_user.firstName + cur_user.lastName;
                 Session["schoolID"] = cur_user.schoolNameId;
                 Session["privilege"] = Models.MembersData.getTitle(cur_user.userTypeId);
-                Session["privilegeID"] = cur_user.userTypeId;
+                Session["privilegeID"] = 2; // cur_user.userTypeId;
                 Session["createdDate"] = cur_user.createDate.ToString("MM/dd/yyyy");
                 return RedirectToAction("HomePage");
             }

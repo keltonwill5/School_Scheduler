@@ -1,349 +1,352 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>View Events</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="~/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="~/plugins/fullcalendar/fullcalendar.print.css" media="print">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="~/dist/css/skins/_all-skins.min.css">
+@using COP_4710_College_App.Models
+@model IEnumerable<EventsViewModel>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>View Events</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.6 -->
+        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- fullCalendar 2.2.5-->
+        <link rel="stylesheet" href="~/plugins/fullcalendar/fullcalendar.min.css">
+        <link rel="stylesheet" href="~/plugins/fullcalendar/fullcalendar.print.css" media="print">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/dist/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="~/dist/css/skins/_all-skins.min.css">
 
-        <header class="main-header">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
 
-            <!-- Logo -->
-            <a href="../Home/HomePage" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png"/></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">@Session["privilege"]</span>
-            </a>
+            <header class="main-header">
 
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                <!-- Logo -->
+                <a href="../Home/HomePage" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><img height="50" width="50" src="../../Images/logo.png" /></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg">@Session["privilege"]</span>
                 </a>
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
 
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"> Testing </i>
-                                            </a>
-                                        </li>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <!-- Navbar Right Menu -->
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
 
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/Images/stickman.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">@Session["name"]</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
+                            <!-- Notifications: style can be found in dropdown.less -->
+                            <li class="dropdown notifications-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 10 notifications</li>
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-red"> Testing </i>
+                                                </a>
+                                            </li>
 
-                                    <p>
-                                        @Session["name"] - @Session["privilege"]
-                                        <small>Member since @Session["createdDate"]</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="~/Home/LoginPage" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
-                </div>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
+                            <!-- Tasks: style can be found in dropdown.less -->
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="~/Images/stickman.jpg" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">@Session["name"]</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
 
-            </nav>
-        </header>
-
-
-
-
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
+                                        <p>
+                                            @Session["name"] - @Session["privilege"]
+                                            <small>Member since @Session["createdDate"]</small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="~/Home/LoginPage" class="btn btn-default btn-flat">Sign out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="pull-left info">
-                        <p>@Session["name"]</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">NAVIGATION Options</li>
-                    <li>
-                        <a href="~/Home/HomePage">
-                            <i class="fa fa-dashboard"></i> <span>Summary</span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-university"></i> <span>Schools</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">@Session["numSchools"]</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li class="active"><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
-                            </ul>
-                        </a>
-                    </li>
+                </nav>
+            </header>
 
-                    <li class="active">
-                        <a href="">
-                            <i class="fa fa-calendar"></i> <span>Events</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">@Session["numEvents"]</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li class="active"><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
-                                <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
-                            </ul>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-users"></i> <span>Users</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">@Session["numMembers"]</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li class="active"><a href="~/Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
-                            </ul>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-archive"></i> <span>Organizations</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">@Session["numOrg"]</small>
-                            </span>
-                            <ul class="treeview-menu">
-                                <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
-                                <li><a href="~/Organizations/AddOrganizations"><i class="fa fa-circle-o"></i>Add</a></li>
-                            </ul>
-                        </a>
-                    </li>
 
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    Events
-                    <small>Calendar</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Events</li>
-                </ol>
-            </section>
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-                    <!-- /.col -->
-                    <div class="col-md-9">
-                        <div class="box box-primary">
-                            <div class="box-body no-padding">
-                                <!-- THE CALENDAR -->
-                                <div id="calendar"></div>
-                            </div>
-                            <!-- /.box-body -->
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="~/Images/stickman.jpg" class="img-circle" alt="User Image">
                         </div>
-                        <!-- /. box -->
+                        <div class="pull-left info">
+                            <p>@Session["name"]</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
                     </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0.0
-            </div>
-            <strong>Copyright &copy; 2017 <a href="#">College Event Planner</a>.</strong> All rights
-            reserved.
-        </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
-            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- Home tab content -->
-                <div class="tab-pane" id="control-sidebar-home-tab">
-                    <h3 class="control-sidebar-heading">Recent Activity</h3>
-                    <ul class="control-sidebar-menu">
-
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">NAVIGATION Options</li>
                         <li>
-                            <a href="javascript:void(0)">
-                                <i class="menu-icon fa fa-user bg-yellow"></i>
-
-                                <div class="menu-info">
-                                    <h4 class="control-sidebar-subheading">John Updated His Profile</h4>
-
-                                    <p>New phone +1(800)555-1234</p>
-                                </div>
+                            <a href="~/Home/HomePage">
+                                <i class="fa fa-dashboard"></i> <span>Summary</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="javascript:void(0)">
-                                <i class="menu-icon fa fa-comment-o bg-light-blue"></i>
-
-                                <div class="menu-info">
-                                    <h4 class="control-sidebar-subheading">Nora Joined Kappa Sigma</h4>
-
-                                    <p>nora@example.com</p>
-                                </div>
+                            <a href="pages/calendar.html">
+                                <i class="fa fa-university"></i> <span>Schools</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numSchools"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li class="active"><a href="~/Schools/ViewSchools"><i class="fa fa-circle-o"></i> View</a></li>
+                                    <li><a href="~/Schools/AddSchools"><i class="fa fa-circle-o"></i>Add</a></li>
+                                </ul>
                             </a>
                         </li>
+
+                        <li class="active">
+                            <a href="">
+                                <i class="fa fa-calendar"></i> <span>Events</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numEvents"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li class="active"><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
+                                    <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
+                                    <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                    <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
+                                </ul>
+                            </a>
+                        </li>
+
                         <li>
-                            <a href="javascript:void(0)">
-                                <i class="menu-icon fa fa-minus-circle bg-red"></i>
-
-                                <div class="menu-info">
-                                    <h4 class="control-sidebar-subheading">2 Events were cancelled last week</h4>
-
-                                    <p>Last modification 5 minutes ago</p>
-                                </div>
+                            <a href="pages/calendar.html">
+                                <i class="fa fa-users"></i> <span>Users</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numMembers"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li class="active"><a href="~/Users/ViewUsers"><i class="fa fa-circle-o"></i> View</a></li>
+                                </ul>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="pages/calendar.html">
+                                <i class="fa fa-archive"></i> <span>Organizations</span>
+                                <span class="pull-right-container">
+                                    <small class="label pull-right bg-green">@Session["numOrg"]</small>
+                                </span>
+                                <ul class="treeview-menu">
+                                    <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
+                                    <li><a href="~/Organizations/AddOrganizations"><i class="fa fa-circle-o"></i>Add</a></li>
+                                </ul>
+                            </a>
+                        </li>
+
                     </ul>
-                    <!-- /.control-sidebar-menu ->>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
 
-                    <!-- /.control-sidebar-menu -->
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Events
+                        <small>Calendar</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Events</li>
+                    </ol>
+                </section>
 
-                </div>
-                <!-- /.tab-pane -->
-                <!-- /.tab-pane -->
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="box box-primary">
+                                <div class="box-body no-padding">
+                                    <!-- THE CALENDAR -->
+                                    <div id="calendar"></div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /. box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+                <!-- /.content -->
             </div>
-        </aside>
-        <!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
-    </div>
-    <!-- ./wrapper -->
-    <!-- jQuery 2.2.3 -->
-    <script src="~/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <!-- Slimscroll -->
-    <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="~/plugins/fastclick/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/dist/js/app.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/dist/js/demo.js"></script>
-    <!-- fullCalendar 2.2.5 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="~/plugins/fullcalendar/fullcalendar.min.js"></script>
-    <!-- Page specific script -->
-    <script>
+            <!-- /.content-wrapper -->
+
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 1.0.0
+                </div>
+                <strong>Copyright &copy; 2017 <a href="#">College Event Planner</a>.</strong> All rights
+                reserved.
+            </footer>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Create the tabs -->
+                <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                    <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- Home tab content -->
+                    <div class="tab-pane" id="control-sidebar-home-tab">
+                        <h3 class="control-sidebar-heading">Recent Activity</h3>
+                        <ul class="control-sidebar-menu">
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <i class="menu-icon fa fa-user bg-yellow"></i>
+
+                                    <div class="menu-info">
+                                        <h4 class="control-sidebar-subheading">John Updated His Profile</h4>
+
+                                        <p>New phone +1(800)555-1234</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <i class="menu-icon fa fa-comment-o bg-light-blue"></i>
+
+                                    <div class="menu-info">
+                                        <h4 class="control-sidebar-subheading">Nora Joined Kappa Sigma</h4>
+
+                                        <p>nora@example.com</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <i class="menu-icon fa fa-minus-circle bg-red"></i>
+
+                                    <div class="menu-info">
+                                        <h4 class="control-sidebar-subheading">2 Events were cancelled last week</h4>
+
+                                        <p>Last modification 5 minutes ago</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.control-sidebar-menu ->>
+
+                        <!-- /.control-sidebar-menu -->
+
+                    </div>
+                    <!-- /.tab-pane -->
+                    <!-- /.tab-pane -->
+                </div>
+            </aside>
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed
+                 immediately after the control sidebar -->
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- ./wrapper -->
+        <!-- jQuery 2.2.3 -->
+        <script src="~/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <!-- Bootstrap 3.3.6 -->
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <!-- Slimscroll -->
+        <script src="~/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="~/plugins/fastclick/fastclick.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="~/dist/js/demo.js"></script>
+        <!-- fullCalendar 2.2.5 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+        <script src="~/plugins/fullcalendar/fullcalendar.min.js"></script>
+        <!-- Page specific script -->
+        <script type="text/javascript">
   $(function () {
 
     /* initialize the external events
@@ -374,11 +377,27 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
+    //Data for the calendar events (dummy data)
     var date = new Date();
     var d = date.getDate(),
         m = date.getMonth(),
         y = date.getFullYear();
+    var listEvents = [];
+
+    @foreach(var item in Model)
+    {
+        <text>
+            var simpleEvent = {};
+            simpleEvent.title = '@(item.name)';
+            simpleEvent.start = '@(item.time)';
+            simpleEvent.allDay = false;
+            simpleEvent.backgroundColor = "#0073b7";
+            simpleEvent.borderColor = "#0073b7";
+
+            listEvents.push(simpleEvent);
+        </text>
+    }
+
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -391,55 +410,11 @@
         week: 'week',
         day: 'day'
       },
+
       //Random default events
-      /*events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1),
-          backgroundColor: "#f56954", //red
-          borderColor: "#f56954" //red
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2),
-          backgroundColor: "#f39c12", //yellow
-          borderColor: "#f39c12" //yellow
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          backgroundColor: "#0073b7", //Blue
-          borderColor: "#0073b7" //Blue
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          backgroundColor: "#00c0ef", //Info (aqua)
-          borderColor: "#00c0ef" //Info (aqua)
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: "#00a65a", //Success (green)
-          borderColor: "#00a65a" //Success (green)
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/',
-          backgroundColor: "#3c8dbc", //Primary (light-blue)
-          borderColor: "#3c8dbc" //Primary (light-blue)
-        }
-      ],*/
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar !!!
+      events: listEvents,
+      editable: false,
+      droppable: false, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped
 
         // retrieve the dropped element's stored Event Object
@@ -499,7 +474,6 @@
       $("#new-event").val("");
     });
   });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
-

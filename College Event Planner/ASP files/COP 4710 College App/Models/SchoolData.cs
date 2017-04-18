@@ -62,7 +62,6 @@ namespace COP_4710_College_App.Models
         public static List<SchoolViewModel> viewSchools()
         {
             List<SchoolViewModel> schools = new List<SchoolViewModel>();
-            SchoolViewModel skool = new SchoolViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
@@ -71,6 +70,7 @@ namespace COP_4710_College_App.Models
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    SchoolViewModel skool = new SchoolViewModel();
                     skool.id = reader.GetInt32(reader.GetOrdinal("ID"));
                     skool.name = reader.GetString(reader.GetOrdinal("name"));
                     skool.address = reader.GetString(reader.GetOrdinal("address"));

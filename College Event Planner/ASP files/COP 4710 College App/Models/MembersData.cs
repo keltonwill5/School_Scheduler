@@ -70,7 +70,6 @@ namespace COP_4710_College_App.Models
         public static List<MembersViewModel> viewMembers()
         {
             List<MembersViewModel> members = new List<MembersViewModel>();
-            MembersViewModel member = new MembersViewModel();
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
@@ -79,6 +78,7 @@ namespace COP_4710_College_App.Models
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    MembersViewModel member = new MembersViewModel();
                     member.id = reader.GetInt32(reader.GetOrdinal("Id"));
                     member.firstName = reader.GetString(reader.GetOrdinal("firstName"));
                     member.lastName = reader.GetString(reader.GetOrdinal("lastName"));

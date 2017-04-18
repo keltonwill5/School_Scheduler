@@ -7,18 +7,18 @@ using System.Web.Mvc;
 namespace COP_4710_College_App.Controllers
 {
     public class EventsController : Controller
-    {   
+    {
         public ActionResult ViewEvents()
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
 
+            List<Models.EventsViewModel> events = new List<Models.EventsViewModel>();
+            events = Models.EventsData.viewEvents();
 
-            ViewBag.events = Models.EventsData.viewEvents();
-            
-            return View();
+            return View(events);
         }
 
         [HttpGet]
