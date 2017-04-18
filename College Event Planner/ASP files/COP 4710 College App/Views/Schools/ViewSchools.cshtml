@@ -189,7 +189,7 @@
                                 @if ((int)Session["privilegeID"] >= 1)
                                 {
                                     <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                    <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
+                                   <!-- <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>-->
                                 }
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
                                 <li><a href="~/Events/ReviewEvents"><i class="fa fa-circle-o"></i> Review</a></li>
@@ -338,7 +338,7 @@
                                                     {
                                                         <button id="DeleteBtn" value="@item.id" name="DeleteBtn" type="submit" class="btn btn-danger">Delete</button>
                                                     }
-                                                    <button id="ModifyBtn"  value="@item.id" onclick="@{val = item.id;}" name ="ModifyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button> 
+                                                    <!--<button id="ModifyBtn"  value="@item.id" onclick="@{val = @item.id;}" name ="ModifyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button> -->
 
 
                                                </td>
