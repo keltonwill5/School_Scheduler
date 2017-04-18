@@ -64,6 +64,8 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("HomePage", "Home");
             }
+            ViewBag.schools = Models.SchoolData.viewSchools();
+            ViewBag.rsoTypes = Models.RsoData.rsoTypes();
 
             Models.RsoData.addRSO(Name, SchoolName, Type, ContactName, ContactPhone, ContactEmail, Desc, 0);
             return View();
