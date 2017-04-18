@@ -16,7 +16,7 @@ namespace COP_4710_College_App.Controllers
         public ActionResult LoginPage()
         {
 
-            /*
+            
             Session["loggedIn"] = true;
 
             Session["name"] = "David Clapp";
@@ -27,7 +27,7 @@ namespace COP_4710_College_App.Controllers
             return RedirectToAction("HomePage");
 
 
-            */
+            
 
 
 
