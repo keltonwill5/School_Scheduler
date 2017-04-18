@@ -77,27 +77,27 @@
                               <li>
                                   <!-- inner menu: contains the actual data -->
                         <!--<ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"> Testing </i>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning text-yellow"></i> 10 new RSOs have been created
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-red"> Testing </i>
+                                            </a>
+                                        </li>
 
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>-->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>-->
                         <!-- Tasks: style can be found in dropdown.less -->
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -229,7 +229,7 @@
                                 <li><a href="~/Organizations/ViewOrganizations"><i class="fa fa-circle-o"></i> View</a></li>
                                 @if ((int)Session["privilegeID"] > 0)
                                 {
-                                    <li><a href="~/Organizations/AddOrganizations"><i id="AdminAddOrg" name="AdminAddOrg" class="fa fa-circle-o"></i>Add</a></li>
+                                    <li><a href="~/Organization/AddOrganizations"><i id="AdminAddOrg" name="AdminAddOrg" class="fa fa-circle-o"></i>Add</a></li>
                                 }
                             </ul>
                         </a>
@@ -301,19 +301,19 @@
                                         </div>
                                     </div>
 
-                                    
 
-                                        <div class="form-group">
-                                            <label>Date:</label>
 
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right" id="datepicker">
+                                    <div class="form-group">
+                                        <label>Date:</label>
+
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
                                             </div>
+                                            <input type="text" class="form-control pull-right" id="datepicker">
                                         </div>
-                                    
+                                    </div>
+
 
                                     <div class="form-group">
                                         <label>Contact Phone:</label>
@@ -384,7 +384,7 @@
                                     </div>
 
                                     <br>
-                      
+
                                     <!-- /.input group -->
                                 </div>
                                 <!-- /.input group -->
@@ -573,5 +573,5 @@
     });
     </script>
 </body>
-
+<!-- updated user interface-->
 </html>
