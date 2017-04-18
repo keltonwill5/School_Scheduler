@@ -6,12 +6,29 @@ namespace COP_4710_College_App.Models
 {
     public class EventsData
     {
-        public static void addEvent(string nameVar, string descVar, string categoryVar, int timeVar, int dateVar, string locationVar, string phoneVar, string emailVar, string privacyVar, string schoolNameVar, string rsoNameVar, string commentsVar, string ratingVar)
+
+        public static void joinEvent(int eventID, int userID)
         {
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO events VALUES (null, @name, @createDate, @description, (SELECT Id FROM event_category WHERE event_category.category=@categoryId), @time, @date, @location, @contactPhone, @contactEmail, (SELECT Id FROM user_type WHERE user_type.type=@privacyId), (SELECT Id FROM school WHERE school.name=@schoolNameId), (SELECT Id FROM rso WHERE rso.name=@rsoNameId), @comments, @rating)";
+                string query = "INSERT INTO event_users (event_id, user_id) SELECT @event_id, @user_id FROM event_users WHERE NOT EXISTS (Select * from event_users where event_id=0 and user_id=1) LIMIT 1";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                cmd.Parameters.AddWithValue("@event_id", eventID);
+                cmd.Parameters.AddWithValue("@user_id", userID);
+                cmd.ExecuteNonQuery();
+            }
+
+            dbCon.Close();
+        }
+
+        public static void addEvent(string nameVar, string descVar, string categoryVar, DateTime timeVar, string locationVar, string phoneVar, string emailVar, int schoolNameVar, string rsoNameVar)
+        {
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "INSERT INTO events VALUES (null, @name, @createDate, @description, (SELECT Id FROM event_category WHERE event_category.category=@categoryId), @time, @location, @contactPhone, @contactEmail, 2, @schoolNameId, (SELECT Id FROM rso WHERE rso.name=@rsoNameId), @comments, @rating)";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
 
                 cmd.Parameters.AddWithValue("@name", nameVar);
@@ -19,15 +36,13 @@ namespace COP_4710_College_App.Models
                 cmd.Parameters.AddWithValue("@description", descVar);
                 cmd.Parameters.AddWithValue("@categoryId", categoryVar);
                 cmd.Parameters.AddWithValue("@time", timeVar);
-                cmd.Parameters.AddWithValue("@date", dateVar);
                 cmd.Parameters.AddWithValue("@location", locationVar);
                 cmd.Parameters.AddWithValue("@contactPhone", phoneVar);
                 cmd.Parameters.AddWithValue("@contactEmail", emailVar);
-                cmd.Parameters.AddWithValue("@privacyId", privacyVar);
                 cmd.Parameters.AddWithValue("@schoolNameId", schoolNameVar);
                 cmd.Parameters.AddWithValue("@rsoNameId", rsoNameVar);
-                cmd.Parameters.AddWithValue("@comments", commentsVar);
-                cmd.Parameters.AddWithValue("@rating", ratingVar);
+                cmd.Parameters.AddWithValue("@comments", "");
+                cmd.Parameters.AddWithValue("@rating", "5");
                 cmd.ExecuteNonQuery();
             }
 
