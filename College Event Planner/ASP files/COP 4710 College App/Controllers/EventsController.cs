@@ -34,13 +34,13 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("HomePage", "Home");
             }
 
-           
+
             return View();
         }
-       
 
 
-       [HttpPost]
+
+        [HttpPost]
         public ActionResult AddEvents(string name, string type, string desc, string time, string date, string number, string address, string radius, string email)
         {
 
@@ -53,7 +53,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("HomePage", "Home");
             }
 
-            Models.EventsData.addEvent(name, desc, type,int.Parse(time), int.Parse(date), address, number, email, "0", (string)Session["schoolID"], "", "", "");
+            Models.EventsData.addEvent(name, desc, type, int.Parse(time), int.Parse(date), address, number, email, "0", (string)Session["schoolID"], "", "", "");
 
 
             return RedirectToAction("ViewEvents");
@@ -63,7 +63,7 @@ namespace COP_4710_College_App.Controllers
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
             if (Models.SessionHandler.userAllowed(2) == false)
             {
@@ -76,11 +76,14 @@ namespace COP_4710_College_App.Controllers
         {
             if (Models.SessionHandler.loggedIn() == false)
             {
-                return RedirectToAction("LoginPage","Home");
+                return RedirectToAction("LoginPage", "Home");
             }
             return View();
         }
 
-        
+        public ActionResult ReviewEvents()
+        {
+            return View();
+        }
     }
 }
