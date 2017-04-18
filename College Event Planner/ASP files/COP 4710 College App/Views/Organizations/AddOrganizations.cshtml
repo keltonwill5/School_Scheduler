@@ -242,7 +242,7 @@
                                             
                                             @foreach (var item in ViewBag.schools)
                                             {
-                                                <option>@item.name</option>
+                                                <option value="@item.name">@item.name</option>
                                             }
                                         </select>
                                     </div>
@@ -255,7 +255,7 @@
                                         <select id="Type" name="Type" class="form-control">
                                             @foreach (var item in ViewBag.rsoTypes)
                                             {
-                                                <option>@item.type</option>
+                                                <option value="@item.type">@item.type</option>
                                             }
                                         </select>
                                     </div>
