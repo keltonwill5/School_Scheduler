@@ -99,47 +99,46 @@ namespace COP_4710_College_App.Models
 
         public static Boolean loginMember(string emailVar, string passwordVar)
         {
-            string query = null;
+            Boolean canLogin = false;
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                query = "SELECT Id FROM users WHERE users.email = @email AND users.password = @password";
+                string query = "SELECT Id FROM members WHERE members.email = @email AND members.password = @password";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
-
                 cmd.Parameters.AddWithValue("@email", emailVar);
                 cmd.Parameters.AddWithValue("@password", passwordVar);
+                var reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    canLogin = true;
+                }
             }
-            if (query != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return canLogin;
 
         }
 
 
         public static Boolean checkExist(string emailVar)
         {
-            string query = null;
+            Boolean exists = false;
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                query = "SELECT Id FROM users WHERE users.email = @email";
+                string query = "SELECT Id FROM members WHERE members.email = @email";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
-
                 cmd.Parameters.AddWithValue("@email", emailVar);
+                var reader = cmd.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    exists = true;
+                }
             }
-            if (query != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return exists;
+
 
         }
 
