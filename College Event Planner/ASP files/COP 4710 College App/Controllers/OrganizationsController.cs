@@ -16,6 +16,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("LoginPage", "Home");
             }
             ViewBag.rsos = Models.RsoData.viewRSO();
+            ViewBag.schools = Models.SchoolData.viewSchools();
             return View();
         }
 

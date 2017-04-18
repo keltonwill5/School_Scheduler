@@ -55,6 +55,7 @@ namespace COP_4710_College_App.Controllers
                 Session["loggedIn"] = true;
 
                 Session["name"] = cur_user.firstName + cur_user.lastName;
+                Session["curID"] = cur_user.id;
                 Session["schoolID"] = cur_user.schoolNameId;
                 Session["privilege"] = Models.MembersData.getTitle(cur_user.userTypeId);
                 Session["privilegeID"] = 2; // cur_user.userTypeId;
