@@ -178,7 +178,6 @@
                             <ul class="treeview-menu">
                                 <li><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
                                 <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
                             </ul>
                         </a>
@@ -252,10 +251,6 @@
                                         <label>School</label>
                                         <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
                                             <select class="form-control">
-                                                @foreach (var item in ViewBag.schools)
-                                                {
-                                                    <option value="@item.id">@item.name</option>
-                                                }
                                             </select>
                                         </div>
                                     </div>
@@ -360,11 +355,9 @@
                                                     {
                                                         <button id="DeleteBtn" value="@item.id" name="DeleteBtn" type="submit" class="btn btn-danger">Delete</button>
                                                     }
-                                                    <button id="ModifyBtn" value="@item.id" name="ModifyBtn" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Update">Update</button>
-
                                                     @using (Html.BeginForm("JoinRSO", "Organizations"))
                                                     {
-                                                        <button id="JoinBtn" value="@item.id" name="JoinBtn" type="submit" class="btn btn-danger">Join</button>
+                                                        <button id="JoinBtn" value="@item.id" name="JoinBtn" type="submit" class="btn btn-primary">Join</button>
                                                     }
                                                 </td>
                                             </tr>

@@ -179,7 +179,6 @@
                             <ul class="treeview-menu">
                                 <li><a href="~/Events/ViewEvents"><i class="fa fa-circle-o"></i> View</a></li>
                                 <li><a href="~/Events/AddEvents"><i class="fa fa-circle-o"></i>Add</a></li>
-                                <li><a href="~/Events/ModifyEvents"><i class="fa fa-circle-o"></i> Modify</a></li>
                                 <li><a href="~/Events/JoinEvents"><i class="fa fa-circle-o"></i> Join</a></li>
                             </ul>
                         </a>
@@ -240,10 +239,11 @@
                                     <div class="form-group">
                                         <label>School</label>
                                         <select id="SchoolName" name="SchoolName" class="form-control">
-                                            <option>dfs</option>
-                                            <option>FSU</option>
-                                            <option>UM</option>
-                                            <option>FIU</option>
+                                            
+                                            @foreach (var item in ViewBag.schools)
+                                            {
+                                                <option>@item.name</option>
+                                            }
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -253,11 +253,10 @@
                                     <div class="form-group">
                                         <label>Type</label>
                                         <select id="Type" name="Type" class="form-control">
-                                            <option value="test">test</option>
-                                            <option value="Religious">Religious</option>
-                                            <option value="Political">Political</option>
-                                            <option value="Academic">Academic</option>
-                                            <option value="Recreational">Recreational</option>
+                                            @foreach (var item in ViewBag.rsoTypes)
+                                            {
+                                                <option>@item.type</option>
+                                            }
                                         </select>
                                     </div>
                                     <div class="form-group">

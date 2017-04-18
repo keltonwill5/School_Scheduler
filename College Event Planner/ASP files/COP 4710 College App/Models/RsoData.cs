@@ -115,5 +115,27 @@ namespace COP_4710_College_App.Models
             dbCon.Close();
             return rsos;
         }
+
+        public static List<RsoViewModel> rsoTypes()
+        {
+            List<RsoViewModel> rsos = new List<RsoViewModel>();
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM rso_type";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    RsoViewModel rso = new RsoViewModel();
+                    rso.id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    rso.type = reader.GetString(reader.GetOrdinal("type"));
+                    rsos.Add(rso);
+                }
+            }
+
+            dbCon.Close();
+            return rsos;
+        }
     }
 }

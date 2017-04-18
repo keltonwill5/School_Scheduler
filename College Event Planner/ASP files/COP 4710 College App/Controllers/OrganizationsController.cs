@@ -16,6 +16,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("LoginPage", "Home");
             }
             ViewBag.rsos = Models.RsoData.viewRSO();
+            ViewBag.schools = Models.SchoolData.viewSchools();
             return View();
         }
 
@@ -47,10 +48,8 @@ namespace COP_4710_College_App.Controllers
             {
                 return RedirectToAction("HomePage", "Home");
             }
-            if (Models.SessionHandler.loggedIn() == false)
-            {
-                return RedirectToAction("LoginPage", "Home");
-            }
+            ViewBag.schools = Models.SchoolData.viewSchools();
+            ViewBag.rsoTypes = Models.RsoData.rsoTypes();
             return View();
         }
 
@@ -66,7 +65,7 @@ namespace COP_4710_College_App.Controllers
                 return RedirectToAction("HomePage", "Home");
             }
 
-            Models.RsoData.addRSO(Name, SchoolName, Type, ContactName, ContactPhone, ContactEmail, Desc, 4);
+            Models.RsoData.addRSO(Name, SchoolName, Type, ContactName, ContactPhone, ContactEmail, Desc, 0);
             return View();
         }
 
